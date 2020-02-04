@@ -63,6 +63,17 @@ agg_data.drop(agg_data.loc[:,'CBQ596': 'CBQ590'], axis=1, inplace=True)
 agg_data.drop(['DSDANCNT', 'DSD010'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:,'DSQTKCAL': 'DSQTIODI'], axis=1, inplace=True)
 
+#alcohol use
+agg_data.drop(['ALQ110', 'ALQ120Q', 'ALQ120U', 'ALQ141U', 'ALQ151', 'ALQ160'], axis=1, inplace=True)
+
+#drug use
+agg_data.drop(agg_data.loc[:,'DUQ210': 'DUQ240'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DUQ260': 'DU280'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DUQ300': 'DU320'], axis=1, inplace=True)
+agg_data.drop('DUQ280', axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DUQ340': 'DUQ430'], axis=1, inplace=True)
+
+
 #health insurance
 agg_data.drop(agg_data.loc[:,'HIQ031A': 'HIQ210'], axis=1, inplace=True)
 
