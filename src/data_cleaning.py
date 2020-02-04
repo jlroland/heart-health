@@ -16,42 +16,6 @@ for file in files:
 agg_data = pd.concat(df_dict.values(), axis=1)
 agg_data = agg_data[(agg_data['RIDAGEYR']>=18) & (agg_data['RIDSTATR']==2)]  #only considering adults
 
-#demo data
-# agg_data.drop(['SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'RIDEXMON', 'RIDEXAGM'], axis=1, inplace=True)
-# agg_data.drop(agg_data.loc[:,'RIDEXPRG':'AIALANGA'], axis=1, inplace=True)
-# agg_data.drop(agg_data.loc[:,'DMDHRGND':'INDFMPIR'], axis=1, inplace=True)
-
-#BP exam
-#agg_data.drop(['PEASCCT1', 'BPAARM', 'BPACSZ', 'BPXPULS', 'BPXPTY', 'BPXML1', 'BPAEN1', 'BPAEN2', 'BPAEN3', 'BPAEN4'], axis=1, inplace=True)
-
-#body measure
-#agg_data.drop(['BMIWT', 'BMIRECUM', 'BMXHEAD', 'BMIHEAD', 'BMIHT', 'BMXLEG', 'BMILEG', 'BMXARML', 'BMXARMC', 
-               'BMIARMC', 'BMIWAIST', 'BMXSAD1', 'BMXSAD2', 'BMXSAD3', 'BMXSAD4', 'BMDSADCM'], axis=1, inplace=True)
-
-#lab data
-# agg_data.drop(['LBDGLUSI', 'LBDHDDSI', 'LBDTRSI', 'LBDLDLSI', 'LBDHRPLC', 'LBDINSI',
-#                'LBDINLC'], axis=1, inplace=True)
-# agg_data.drop(['LBDGLTSI', 'GTDSCMMN', 'GTDDR1MN', 'GTDBL2MN', 'GTDDR2MN', 'GTXDRANK', 
-#                'GTDCODE'], axis=1, inplace=True)
-
-#diet behavior
-# agg_data.drop(agg_data.loc[:, 'DBQ010': 'DBQ424'], axis=1, inplace=True)
-# agg_data.drop(agg_data.loc[:,'CBQ596': 'CBQ590'], axis=1, inplace=True)
-
-#health insurance
-#agg_data.drop(agg_data.loc[:,'HIQ031A': 'HIQ210'], axis=1, inplace=True)
-
-#income
-# agg_data.drop(agg_data.loc[:,'INQ020': 'INQ150'], axis=1, inplace=True)
-# agg_data.drop(['INQ320'], axis=1, inplace=True)
-
-#medical conditions
-# agg_data.drop(agg_data.loc[:, 'MCQ149':'MCQ180N'], axis=1, inplace=True)
-# agg_data.drop(agg_data.loc[:, 'MCQ220':'MCQ240Z'], axis=1, inplace=True)
-# agg_data.drop('OSQ230', axis=1, inplace=True)
-
-#physical activity
-#agg_data.drop(agg_data.loc[:, 'PAQ722':'PAQ772C'], axis=1, inplace=True)
 
 #cardio questions only asked of people age 40+
 angina = agg_data[(agg_data['CDQ001'] == 1) & (agg_data['CDQ002'] == 1) & (agg_data['CDQ004'] == 1)
@@ -68,4 +32,50 @@ for num in angina.index:
 for num in heart_history.index:
     cardio_risk[num] = 1
 
-#
+#leaky data for cardio risk
+agg_data.drop(agg_data.loc[:,'CDQ001':'CDQ010'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'MCQ160B':'MCQ180F'], axis=1, inplace=True)
+
+
+#demo data
+agg_data.drop(['SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'RIDEXMON', 'RIDEXAGM'], axis=1, inplace=True)
+agg_data.drop(['DMQADFC', 'DMDCITZN', 'DMDEDUC3'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'RIDEXPRG':'INDFMPIR'], axis=1, inplace=True)
+
+#BP exam
+agg_data.drop(['PEASCCT1', 'BPXCHR', 'BPAARM', 'BPACSZ', 'BPXPULS', 'BPXPTY', 'BPXML1', 'BPAEN1', 'BPAEN2', 'BPAEN3', 'BPAEN4'], axis=1, inplace=True)
+
+#body measure
+agg_data.drop(agg_data.loc[:, 'BMDSTATS':'BMIHT'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'BMDBMIC':'BMIARMC'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'BMXWAIST':'BMXSAD4'], axis=1, inplace=True)
+agg_data.drop('BMDSADCM', axis=1, inplace=True)
+
+#lab data
+agg_data.drop(['WTSAF2YR','LBDGLUSI', 'LBDHDDSI', 'LBDTRSI', 'LBDLDLSI', 'LBDHRPLC', 'LBDINSI',
+               'LBDINLC'], axis=1, inplace=True)
+
+#diet behavior
+agg_data.drop(agg_data.loc[:, 'DBQ010': 'DBQ424'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'CBQ596': 'CBQ590'], axis=1, inplace=True)
+
+#supps
+agg_data.drop(['DSDANCNT', 'DSD010'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DSQTKCAL': 'DSQTIODI'], axis=1, inplace=True)
+
+#health insurance
+agg_data.drop(agg_data.loc[:,'HIQ031A': 'HIQ210'], axis=1, inplace=True)
+
+#income
+agg_data.drop(agg_data.loc[:,'INQ020': 'INQ150'], axis=1, inplace=True)
+agg_data.drop('INQ320', axis=1, inplace=True)
+
+#medical conditions
+agg_data.drop(agg_data.loc[:, 'MCQ010':'MCQ053'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'MCQ092':'MCQ180N'], axis=1, inplace=True)
+agg_data.drop(['MCQ180G', 'MCQ170M', 'MCQ180M', 'MCQ170K', 'MCQ180K', 'MCQ170L', 'MCQ180L'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'MCQ203':'MCQ240Z'], axis=1, inplace=True)
+agg_data.drop('OSQ230', axis=1, inplace=True)
+
+#physical activity
+agg_data.drop(agg_data.loc[:, 'PAQ722':'PAQ772C'], axis=1, inplace=True)
