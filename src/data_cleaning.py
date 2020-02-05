@@ -104,3 +104,7 @@ agg_data.drop(agg_data.loc[:, 'PAQ722':'PAQ772C'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:, 'WHD010':'WHD080L'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:, 'WHD110':'WHD130'], axis=1, inplace=True)
 agg_data.drop(['WHQ190','WHQ200'], axis=1, inplace=True)
+
+agg_data['RIAGENDR'][agg_data['RIAGENDR']==2] = 0
+agg_data['DMQMILIZ'][agg_data['DMQMILIZ']==2] = 0
+agg_data['DMDBORN4'][agg_data['DMDBORN4']>1] = 0
