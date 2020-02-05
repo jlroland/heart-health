@@ -10,3 +10,4 @@ Data has been excluded for individuals who did not complete the medical examinat
 
 Initial model: Logistic Regression based on age and gender; hard classification had no value (all individuals predicted as low-risk); soft classification resulted in log_loss=0.29
 
+Some features have been omitted due to a very high percentage of missing values or a very high class imbalance.
