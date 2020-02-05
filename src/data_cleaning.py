@@ -39,7 +39,7 @@ agg_data.drop(agg_data.loc[:,'MCQ160B':'MCQ180F'], axis=1, inplace=True)
 
 #demo data
 agg_data.drop(['SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'RIDEXMON', 'RIDEXAGM'], axis=1, inplace=True)
-agg_data.drop(['DMQADFC', 'DMDCITZN', 'DMDEDUC3'], axis=1, inplace=True)
+agg_data.drop(['DMQADFC', 'DMDCITZN', 'DMDEDUC3', 'DMDYRSUS'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:,'RIDEXPRG':'INDFMPIR'], axis=1, inplace=True)
 
 #BP exam
@@ -68,32 +68,24 @@ agg_data.drop(agg_data.loc[:,'DSQTKCAL': 'DSQTIODI'], axis=1, inplace=True)
 #alcohol use
 agg_data.drop(['ALQ110', 'ALQ120Q', 'ALQ120U', 'ALQ141U', 'ALQ151', 'ALQ160'], axis=1, inplace=True)
 
-#drug use
-agg_data.drop(agg_data.loc[:,'DUQ210': 'DUQ240'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'DUQ260': 'DUQ280'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'DUQ300': 'DUQ320'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'DUQ340': 'DUQ430'], axis=1, inplace=True)
-
 #smoking
 agg_data.drop('SMD030', axis=1, inplace=True)
-
 agg_data.drop(agg_data.loc[:,'SMQ050Q': 'SMD641'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'SMD093': 'SMQ852U'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'SMQ930': 'SMAQUEX2'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'SMD093': 'SMAQUEX2'], axis=1, inplace=True)
 
 #health insurance
 agg_data.drop(agg_data.loc[:,'HIQ031A': 'HIQ210'], axis=1, inplace=True)
 
 #income
 agg_data.drop(agg_data.loc[:,'INQ020': 'INQ150'], axis=1, inplace=True)
-agg_data.drop(['INDFMMPI','INDFMMPC','INQ320'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'INDFMMPI':'INQ320'], axis=1, inplace=True)
 
 #medical conditions
 agg_data.drop(agg_data.loc[:, 'MCQ010':'MCQ053'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:, 'MCQ092':'MCQ180N'], axis=1, inplace=True)
-agg_data.drop(['MCQ180G', 'MCQ170M', 'MCQ180M', 'MCQ170K', 'MCQ180K', 'MCQ170L', 'MCQ180L'], axis=1, inplace=True)
+agg_data.drop(['MCQ160G','MCQ180G', 'MCQ160K', 'MCQ160L','MCQ170M', 'MCQ180M', 'MCQ170K', 'MCQ180K', 'MCQ170L', 'MCQ180L'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:, 'MCQ203':'MCQ240Z'], axis=1, inplace=True)
-agg_data.drop('OSQ230', axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'MCQ370A':'OSQ230'], axis=1, inplace=True)
 
 #physical activity
 agg_data.drop(['PAQ610', 'PAD615', 'PAQ625', 'PAD630', 'PAQ640', 'PAD645', 'PAQ655', 'PAD660', 'PAQ670', 'PAD675', 'PAD680',
@@ -101,10 +93,43 @@ agg_data.drop(['PAQ610', 'PAD615', 'PAQ625', 'PAD630', 'PAQ640', 'PAD645', 'PAQ6
 agg_data.drop(agg_data.loc[:, 'PAQ722':'PAQ772C'], axis=1, inplace=True)
 
 #weight history
-agg_data.drop(agg_data.loc[:, 'WHD010':'WHD080L'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:, 'WHD110':'WHD130'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'WHD010':'WHD130'], axis=1, inplace=True)
 agg_data.drop(['WHQ190','WHQ200'], axis=1, inplace=True)
 
 agg_data['RIAGENDR'][agg_data['RIAGENDR']==2] = 0
 agg_data['DMQMILIZ'][agg_data['DMQMILIZ']==2] = 0
 agg_data['DMDBORN4'][agg_data['DMDBORN4']>1] = 0
+agg_data['HIQ011'][agg_data['HIQ011']>1] = 0
+agg_data['SMQ020'][agg_data['SMQ020'] > 1] = 0
+agg_data['DMDEDUC2'][(agg_data['DMDEDUC2'] <= 3) | (agg_data['DMDEDUC2'] == 9) | pd.isna(agg_data['DMDEDUC2'])] = 0 #need to include nan
+agg_data['DMDEDUC2'][agg_data['DMDEDUC2'] > 3] = 1
+agg_data['DMDMARTL'][(agg_data['DMDMARTL'] <= 4) | (agg_data['DMDMARTL'] == 77) | pd.isna(agg_data['DMDMARTL'])] = 1
+agg_data['DMDMARTL'][agg_data['DMDMARTL'] > 4]
+agg_data['DSDCOUNT'][(agg_data['DSDCOUNT'] == 99) | (agg_data['DSDCOUNT'] == 77)] = 1
+agg_data['DSD010AN'][agg_data['DSD010AN'] > 1] = 0
+agg_data['IND235'][(agg_data['IND235'] < 8) | (agg_data['IND235'] == 99) | (agg_data['IND235'] == 77) | (pd.isna(agg_data['IND235']))] = 0
+agg_data['IND235'][agg_data['IND235'] >= 8] = 1
+agg_data['DBD895'][agg_data['DBD895'] == 5555] = 22
+agg_data['DBD895'][agg_data['DBD895'] == 9999] = 3
+agg_data['DBD905'][(agg_data['DBD905'] == 9999) | (agg_data['DBD905'] == 7777) | (pd.isna(agg_data['DBD905']))] = 2
+agg_data['DBD910'][agg_data['DBD910'] == 6666] = 91
+agg_data['DBD910'][(agg_data['DBD910'] == 9999) | (pd.isna(agg_data['DBD910']))] = 2
+agg_data['WHD140'][(agg_data['WHD140'] == 9999) | (agg_data['WHD140'] == 7777)] = 194
+agg_data['WHQ150'][(agg_data['WHQ150'] == 99999) | (pd.isna(agg_data['WHQ150']))] = 40
+agg_data['LBXHSCRP'][pd.isna(agg_data['LBXHSCRP'])] = 4.25
+agg_data['ALQ101'][(agg_data['ALQ101'] == 9) | (pd.isna(agg_data['ALQ101']))] = 1
+agg_data['ALQ101'][agg_data['ALQ101'] == 2] = 0
+agg_data['ALQ130'][agg_data['ALQ130'] == 999] = 3
+agg_data['ALQ130'][pd.isna(agg_data['ALQ130'])] = 0
+agg_data['ALQ141Q'][(agg_data['ALQ141Q'] == 777) | (agg_data['ALQ141Q'] == 999)] = 2
+agg_data['ALQ141Q'][pd.isna(agg_data['ALQ141Q'])] = 0
+agg_data['LBDHDD'][pd.isna(agg_data['LBDHDD'])] = 54
+agg_data['MCQ080'][agg_data['MCQ080'] > 1] = 0
+agg_data['MCQ160M'][(agg_data['MCQ160M'] > 1) | (pd.isna(agg_data['MCQ160M']))] = 0
+agg_data['MCQ300A'][(agg_data['MCQ300A'] > 1) | (pd.isna(agg_data['MCQ300A']))] = 0
+agg_data['MCQ300B'][agg_data['MCQ300B'] > 1] = 0
+agg_data['MCQ300C'][(agg_data['MCQ300C'] > 1) | (pd.isna(agg_data['MCQ300C']))] = 0
+agg_data['MCQ365A'][agg_data['MCQ365A'] == 2] = 0
+agg_data['MCQ365B'][agg_data['MCQ365B'] > 1] = 0
+agg_data['MCQ365C'][agg_data['MCQ365C'] > 1] = 0
+agg_data['MCQ365D'][agg_data['MCQ365D'] > 1] = 0
