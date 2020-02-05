@@ -7,3 +7,6 @@ Note: The Cardiovascular Health questionnaire was only administerd to adults age
 
 While the survey includes data for people of all ages, only data for adults (18+) have been considered here.
 Data has been excluded for individuals who did not complete the medical examinations (257 adults for 2016).
+
+Initial model: Logistic Regression based on age and gender; hard classification had no value (all individuals predicted as low-risk); soft classification resulted in log_loss=0.29
+
