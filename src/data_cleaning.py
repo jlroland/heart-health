@@ -54,9 +54,11 @@ agg_data.drop('BMDSADCM', axis=1, inplace=True)
 #lab data
 agg_data.drop(['WTSAF2YR','LBDGLUSI', 'LBDHDDSI', 'LBDTRSI', 'LBDLDLSI', 'LBDHRPLC', 'LBDINSI',
                'LBDINLC'], axis=1, inplace=True)
+agg_data.drop(['PHAFSTHR','PHAFSTMN'], axis=1, inplace=True)
 
 #diet behavior
 agg_data.drop(agg_data.loc[:, 'DBQ010': 'DBQ424'], axis=1, inplace=True)
+agg_data.drop('DBD900', axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:,'CBQ596': 'CBQ590'], axis=1, inplace=True)
 
 #supps
@@ -68,18 +70,23 @@ agg_data.drop(['ALQ110', 'ALQ120Q', 'ALQ120U', 'ALQ141U', 'ALQ151', 'ALQ160'], a
 
 #drug use
 agg_data.drop(agg_data.loc[:,'DUQ210': 'DUQ240'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'DUQ260': 'DU280'], axis=1, inplace=True)
-agg_data.drop(agg_data.loc[:,'DUQ300': 'DU320'], axis=1, inplace=True)
-agg_data.drop('DUQ280', axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DUQ260': 'DUQ280'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'DUQ300': 'DUQ320'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:,'DUQ340': 'DUQ430'], axis=1, inplace=True)
 
+#smoking
+agg_data.drop('SMD030', axis=1, inplace=True)
+
+agg_data.drop(agg_data.loc[:,'SMQ050Q': 'SMD641'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'SMD093': 'SMQ852U'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:,'SMQ930': 'SMAQUEX2'], axis=1, inplace=True)
 
 #health insurance
 agg_data.drop(agg_data.loc[:,'HIQ031A': 'HIQ210'], axis=1, inplace=True)
 
 #income
 agg_data.drop(agg_data.loc[:,'INQ020': 'INQ150'], axis=1, inplace=True)
-agg_data.drop('INQ320', axis=1, inplace=True)
+agg_data.drop(['INDFMMPI','INDFMMPC','INQ320'], axis=1, inplace=True)
 
 #medical conditions
 agg_data.drop(agg_data.loc[:, 'MCQ010':'MCQ053'], axis=1, inplace=True)
@@ -89,4 +96,11 @@ agg_data.drop(agg_data.loc[:, 'MCQ203':'MCQ240Z'], axis=1, inplace=True)
 agg_data.drop('OSQ230', axis=1, inplace=True)
 
 #physical activity
+agg_data.drop(['PAQ610', 'PAD615', 'PAQ625', 'PAD630', 'PAQ640', 'PAD645', 'PAQ655', 'PAD660', 'PAQ670', 'PAD675', 'PAD680',
+               'PAQ706'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:, 'PAQ722':'PAQ772C'], axis=1, inplace=True)
+
+#weight history
+agg_data.drop(agg_data.loc[:, 'WHD010':'WHD080L'], axis=1, inplace=True)
+agg_data.drop(agg_data.loc[:, 'WHD110':'WHD130'], axis=1, inplace=True)
+agg_data.drop(['WHQ190','WHQ200'], axis=1, inplace=True)
