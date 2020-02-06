@@ -29,3 +29,13 @@ model_gbc = GradientBoostingClassifier(learning_rate=0.1, n_estimators=1000)
 model_gbc.fit(agg_data, cardio_risk)
 y_gbc = model_gbc.predict_proba(agg_data)
 log_loss(cardio_risk, y_gbc)
+
+# model = RandomForestClassifier(n_estimators=1000)
+# for i in range(2,len(feat_scores)+1):
+#     model.fit(agg_data[feat_scores[-i:].index], cardio_risk)
+#     y_hat = model.predict_proba(agg_data[feat_scores[-i:].index])
+#     plt.scatter(i, log_loss(cardio_risk, y_hat))
+
+roc_auc_score(cardio_risk, y_prob[:,1])  #logistic regression
+roc_auc_score(cardio_risk, y_hat_rf[:,1]) #random forest
+roc_auc_score(cardio_risk, y_gbc[:,1])    #gradient boosting classifier
