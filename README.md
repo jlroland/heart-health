@@ -9,12 +9,12 @@ While the survey includes data for people of all ages, only data for adults (18+
 Data has been excluded for individuals who did not complete the medical examinations (257 adults for 2016).
 Some features have been omitted due to a very high percentage of missing values or a very high class imbalance.
 
-Initial model: Logistic Regression based on age and gender; hard classification had no value (all individuals predicted as low-risk); soft classification resulted in log_loss=0.29
+Initial model: Logistic Regression (without train-test-split) based on age and gender; hard classification had no value (all individuals predicted as low-risk); soft classification resulted in log_loss=0.29
 
-After all data cleaning and feature engineering was completed, another Logistic Regression model was applied to the entire feature matrix. The new log loss was 0.25.
+After all data cleaning and feature engineering was completed, possible models were applied to the entire featur matirix and were examined using train-test-split.  A Logistic Regression model was applied and the new log loss was 0.25 and ROC AUC of 0.85, with and without scaling.
 
-A Random Forest Classifier model with n_estimators=1000 was explored next. The entire feature matrix was used and the log loss was 0.07. 
+A Random Forest Classifier model with n_estimators=1000 was explored next. The log loss was 0.25 and ROC AUC of 0.84. 
 
 Generated feature importance plot from Random Forest.
 
-Gradient Boosting with n_estimators=1000 performed similarly to Random Forest.
+Gradient Boosting with n_estimators=1000 had a log loss of 0.31 and ROC AUC of 0.82.

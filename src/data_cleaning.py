@@ -54,7 +54,7 @@ agg_data.drop(agg_data.loc[:, 'BMXWAIST':'BMXSAD4'], axis=1, inplace=True)
 agg_data.drop('BMDSADCM', axis=1, inplace=True)
 
 #lab data
-agg_data.drop(['LBDTCSI', 'LBDHRPLC'], axis=1, inplace=True)
+agg_data.drop('LBDTCSI', axis=1, inplace=True)
 
 #diet behavior
 agg_data.drop(agg_data.loc[:, 'DBQ010': 'DBQ424'], axis=1, inplace=True)
@@ -115,7 +115,6 @@ agg_data['DBD910'][agg_data['DBD910'] == 6666] = 91
 agg_data['DBD910'][(agg_data['DBD910'] == 9999) | (pd.isna(agg_data['DBD910']))] = 2
 agg_data['WHD140'][(agg_data['WHD140'] == 9999) | (agg_data['WHD140'] == 7777)] = 194
 agg_data['WHQ150'][(agg_data['WHQ150'] == 99999) | (pd.isna(agg_data['WHQ150']))] = 40
-agg_data['LBXHSCRP'][pd.isna(agg_data['LBXHSCRP'])] = 4.25
 agg_data['ALQ101'][(agg_data['ALQ101'] == 9) | (pd.isna(agg_data['ALQ101']))] = 1
 agg_data['ALQ101'][agg_data['ALQ101'] == 2] = 0
 agg_data['ALQ130'][agg_data['ALQ130'] == 999] = 3
