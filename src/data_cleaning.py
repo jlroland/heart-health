@@ -3,7 +3,8 @@ import pandas as pd
 import os
 from collections import defaultdict
 
-files = os.listdir('data/data_2016/') # dir is your directory path
+#concatenate csv files in data folder into one dataframe
+files = os.listdir('data/data_2016/')
 file_set = set(files)
 if '.ipynb_checkpoints' in file_set:
     files.remove('.ipynb_checkpoints')
@@ -18,7 +19,7 @@ agg_data = pd.concat(df_dict.values(), axis=1)
 agg_data = agg_data[(agg_data['RIDAGEYR']>=18) & (agg_data['RIDSTATR']==2)]  #only considering adults
 
 
-#cardio questions only asked of people age 40+
+#create Series for target variable
 angina = agg_data[(agg_data['CDQ001'] == 1) & (agg_data['CDQ002'] == 1) & (agg_data['CDQ004'] == 1)
                  & (agg_data['CDQ005'] == 1) & (agg_data['CDQ006'] == 1)
                  & ((agg_data['CDQ009D'] == 4) | (agg_data['CDQ009E'] == 5))
@@ -37,7 +38,7 @@ for num in heart_history.index:
 agg_data.drop(agg_data.loc[:,'CDQ001':'CDQ010'], axis=1, inplace=True)
 agg_data.drop(agg_data.loc[:,'MCQ160B':'MCQ180F'], axis=1, inplace=True)
 
-
+#need to drop variables that were imported from csv files and won't be used in analysis
 #demo data
 agg_data.drop(['SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'RIDEXMON', 'RIDEXAGM'], axis=1, inplace=True)
 agg_data.drop(['DMQADFC', 'DMDCITZN', 'DMDEDUC3', 'DMDYRSUS'], axis=1, inplace=True)
@@ -165,7 +166,7 @@ description_list = ['income > $45K/year', 'num meals not prepared at home', 'num
 features = {code: description for code, description in zip(code_list,description_list)}
 agg_data.rename(mapper=features, axis='columns', inplace=True)
 
-#back-up of dictionary
+#back-up of column name dictionary
 
 # {'income > $45K/year': 'income > $45K/year',
 #  'num meals not prepared at home': 'num meals not prepared at home',
