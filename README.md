@@ -18,3 +18,5 @@ A Random Forest Classifier model with n_estimators=1000 was explored next. The l
 Generated feature importance plot from Random Forest.
 
 Gradient Boosting with n_estimators=1000 had a log loss of 0.31 and ROC AUC of 0.82.
+
+Adding diabetes indicator showed no difference.

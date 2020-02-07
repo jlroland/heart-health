@@ -103,7 +103,7 @@ agg_data['SMQ020'][agg_data['SMQ020'] > 1] = 0
 agg_data['DMDEDUC2'][(agg_data['DMDEDUC2'] <= 3) | (agg_data['DMDEDUC2'] == 9) | pd.isna(agg_data['DMDEDUC2'])] = 0
 agg_data['DMDEDUC2'][agg_data['DMDEDUC2'] > 3] = 1
 agg_data['DMDMARTL'][(agg_data['DMDMARTL'] <= 4) | (agg_data['DMDMARTL'] == 77) | pd.isna(agg_data['DMDMARTL'])] = 1
-agg_data['DMDMARTL'][agg_data['DMDMARTL'] > 4]
+agg_data['DMDMARTL'][agg_data['DMDMARTL'] > 4] = 0
 agg_data['DSDCOUNT'][(agg_data['DSDCOUNT'] == 99) | (agg_data['DSDCOUNT'] == 77)] = 1
 agg_data['DSD010AN'][agg_data['DSD010AN'] > 1] = 0
 agg_data['IND235'][(agg_data['IND235'] < 8) | (agg_data['IND235'] == 99) | (agg_data['IND235'] == 77) | (pd.isna(agg_data['IND235']))] = 0
@@ -146,3 +146,68 @@ agg_data['BPXPLS'][pd.isna(agg_data['BPXPLS'])] = 73
 agg_data['BPXSY1'][pd.isna(agg_data['BPXSY1'])] = 125
 agg_data['BPXDI1'][pd.isna(agg_data['BPXDI1'])] = 70
 agg_data['LBXTC'][pd.isna(agg_data['LBXTC'])] = 189
+
+code_list = list(agg_data.columns)
+description_list = ['income > $45K/year', 'num meals not prepared at home', 'num RTE foods', 'num frozen meals',
+                   'pulse', 'systolic pressure', 'diastolic pressure', 'total cholesterol', 
+                    'smoked 100+ cigs in life', 'do vigorous work', 'do moderate work', 'walk/bike regularly',
+                   'vigorous recreation', 'moderate recreation', '1+ hrs/day TV', 
+                    '1+ hrs/day computer/video games', 'most ever weighed', 'age when heaviest', 
+                   'had 12+ drinks in past year', 'avg num drinks/day', 'num days binge drink in past year',
+                   'doctor ever say overweight', 'doctor ever say thyroid problem', 'close relative heart attack',
+                   'close relative asthma', 'close relative diabetes', 'doctor say lose weight', 'doctor say exercise',
+                   'doctor say reduce salt', 'doctor say reduce fat/calories', 'BMI', 'avg SAD', 'gender', 'age',
+                   'served in military', 'born in U.S.', 'education beyond HS', 'ever married', 'num supplements taken',
+                   'taken antacids', 'covered by health insurance', 'Mexican American', 'Other Hispanic',
+                   'Non-Hispanic White', 'Non-Hispanic Black', 'Non-Hispanic Asian']
+features = {code: description for code, description in zip(code_list,description_list)}
+agg_data.rename(mapper=features, axis='columns', inplace=True)
+
+#back-up of dictionary
+
+# {'income > $45K/year': 'income > $45K/year',
+#  'num meals not prepared at home': 'num meals not prepared at home',
+#  'num RTE foods': 'num RTE foods',
+#  'num frozen meals': 'num frozen meals',
+#  'pulse': 'pulse',
+#  'systolic pressure': 'systolic pressure',
+#  'diastolic pressure': 'diastolic pressure',
+#  'total cholesterol': 'total cholesterol',
+#  'smoked 100+ cigs in life': 'smoked 100+ cigs in life',
+#  'do vigorous work': 'do vigorous work',
+#  'do moderate work': 'do moderate work',
+#  'walk/bike regularly': 'walk/bike regularly',
+#  'vigorous recreation': 'vigorous recreation',
+#  'moderate recreation': 'moderate recreation',
+#  '1+ hrs/day TV': '1+ hrs/day TV',
+#  '1+ hrs/day computer/video games': '1+ hrs/day computer/video games',
+#  'most ever weighed': 'most ever weighed',
+#  'age when heaviest': 'age when heaviest',
+#  'had 12+ drinks in past year': 'had 12+ drinks in past year',
+#  'avg num drinks/day': 'avg num drinks/day',
+#  'num days binge drink in past year': 'num days binge drink in past year',
+#  'doctor ever say overweight': 'doctor ever say overweight',
+#  'doctor ever say thyroid problem': 'doctor ever say thyroid problem',
+#  'close relative heart attack': 'close relative heart attack',
+#  'close relative asthma': 'close relative asthma',
+#  'close relative diabetes': 'close relative diabetes',
+#  'doctor say lose weight': 'doctor say lose weight',
+#  'doctor say exercise': 'doctor say exercise',
+#  'doctor say reduce salt': 'doctor say reduce salt',
+#  'doctor say reduce fat/calories': 'doctor say reduce fat/calories',
+#  'BMI': 'BMI',
+#  'avg SAD': 'avg SAD',
+#  'gender': 'gender',
+#  'age': 'age',
+#  'served in military': 'served in military',
+#  'born in U.S.': 'born in U.S.',
+#  'education beyond HS': 'education beyond HS',
+#  'ever married': 'ever married',
+#  'num supplements taken': 'num supplements taken',
+#  'taken antacids': 'taken antacids',
+#  'covered by health insurance': 'covered by health insurance',
+#  'Mexican American': 'Mexican American',
+#  'Other Hispanic': 'Other Hispanic',
+#  'Non-Hispanic White': 'Non-Hispanic White',
+#  'Non-Hispanic Black': 'Non-Hispanic Black',
+#  'Non-Hispanic Asian': 'Non-Hispanic Asian'}
