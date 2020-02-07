@@ -44,7 +44,7 @@ Logistic regression appears to have the best predictive ability by a narrow marg
 
 Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at various probability thresholds.
 
-![Confusion matrices at different thresholds for logistic regression](img/log_cf.png)
+![Confusion matrices at different thresholds for logistic regression](img/cf_log.png)
 
 
 Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
