@@ -38,11 +38,12 @@ After all data cleaning and feature engineering was completed, the following mod
 
 ## Results
 
+![ROC curves for applied models](img/roc_comparison.png)
 
-![Confusion matrices at different thresholds for logistic regression](img/logistic_confusion_matrix.png)
 
-![Feature comparison between logistic and RF](img/feature_importance.png)
+![Confusion matrices at different thresholds for logistic regression](img/log_cf.png) ![Confusion matrices at different thresholds for MLP Classifier](img/mlp_cf.png)
 
-Generated feature importance plot from Random Forest.
+
+
 
 ![Feature comparison between logistic and RF](img/feature_importance.png)
