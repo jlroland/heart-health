@@ -1,11 +1,13 @@
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
 import os
 from collections import defaultdict
 
 files = os.listdir('data/data_2016/') # dir is your directory path
+file_set = set(files)
+if '.ipynb_checkpoints' in file_set:
+    files.remove('.ipynb_checkpoints')
+    
 number_files = len(files)
 
 df_dict = defaultdict()

@@ -26,6 +26,8 @@ Multiple classification models were considered in order to classify individuals 
 
 The initial baseline model was a logistic regression (without normalization) based on age and gender. The ROC AUC score was 0.79.
 
+![Looking at label distribution based on age & gender](img/initial_model_dist.png)
+
 After all data cleaning and feature engineering was completed, the following models were explored:
 
 1. Logistic Regression with L2 regularization using normalized data
@@ -37,8 +39,10 @@ After all data cleaning and feature engineering was completed, the following mod
 ## Results
 
 
-![ROC curves for various models](img/roc_comparison.png)
+![Confusion matrices at different thresholds for logistic regression](img/logistic_confusion_matrix.png)
 
-
+![Feature comparison between logistic and RF](img/feature_importance.png)
 
 Generated feature importance plot from Random Forest.
+
+![Feature comparison between logistic and RF](img/feature_importance.png)
