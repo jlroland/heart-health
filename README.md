@@ -64,6 +64,6 @@ low-risk, incorrectly identified---------(-500)
 
 ![Cost matrix at threshold 0.75 for logistic regression](img/cost_matrix.png)
 
-Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
+### Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
 
 ![Feature comparison between logistic and RF](img/feature_importance.png)
