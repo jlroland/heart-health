@@ -1,4 +1,4 @@
-# Predicting Risk of Cardiovascular Disease
+# Help Your Heart
 
 ## Introduction
 
@@ -38,10 +38,13 @@ After all data cleaning and feature engineering was completed, the following mod
 
 ## Results
 
+Logistic regression appears to have the best predictive ability by a narrow margin.  The Random Forest Classifier and MLP Classifier performed approximately the same. The Gradient Boosting Classifier came in last.
+
 ![ROC curves for applied models](img/roc_comparison.png)
 
+Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at various probability thresholds.
 
-![Confusion matrices at different thresholds for logistic regression](img/log_cf.png) ![Confusion matrices at different thresholds for MLP Classifier](img/mlp_cf.png)
+![Confusion matrices at different thresholds for logistic regression](img/log_cf.png)
 
 
 Feature Comparison
