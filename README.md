@@ -1,4 +1,10 @@
-# heart-health
+# Predicting Risk of Cardiovascular Disease
+
+## Introduction
+
+Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.
+
+These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?
 
 Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
 1. A combination of answers to the Cardiovascular Health questionnaire which indicate history of angina, or
@@ -20,3 +26,5 @@ Generated feature importance plot from Random Forest.
 Gradient Boosting with n_estimators=1000 had a log loss of 0.31 and ROC AUC of 0.82.
 
 Adding diabetes indicator showed no difference.
+
+![ROC curves for various models](img/roc_comparison.png)
