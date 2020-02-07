@@ -44,7 +44,7 @@ Logistic regression appears to have the best predictive ability by a narrow marg
 
 Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
 
-![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log.png)
+![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log5.png)
 ![Confusion matrix at threshold 0.75 for logistic regression](img/cf_log75.png)
 
 Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
