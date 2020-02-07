@@ -44,6 +44,6 @@ After all data cleaning and feature engineering was completed, the following mod
 ![Confusion matrices at different thresholds for logistic regression](img/log_cf.png) ![Confusion matrices at different thresholds for MLP Classifier](img/mlp_cf.png)
 
 
-
+Feature Comparison
 
 ![Feature comparison between logistic and RF](img/feature_importance.png)
