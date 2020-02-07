@@ -50,8 +50,11 @@ Since logistic regression produced the best metrics, a confusion matrix was cons
 Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
 
 high-risk, correctly identified----------2,000
+
 high-risk, incorrectly indentified-------(-5,000)
+
 low-risk, correctly identified-----------0
+
 low-risk, incorrectly identified---------(-500)
 
 
