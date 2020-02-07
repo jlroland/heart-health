@@ -47,6 +47,6 @@ Since logistic regression produced the best metrics, a confusion matrix was cons
 ![Confusion matrices at different thresholds for logistic regression](img/log_cf.png)
 
 
-Feature Comparison
+Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
 
 ![Feature comparison between logistic and RF](img/feature_importance.png)
