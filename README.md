@@ -14,16 +14,12 @@ https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
 The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to 46 variables to use as features in this model.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. data with 5,000 missing values).
 
-## Models
-
 Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
-1. A combination of answers to the Cardiovascular Health questionnaire which indicate history of angina, or
+1. A combination of answers to the Cardiovascular Health questionnaire which indicate symptoms of angina, or
 2. Answering the Medical History questionnaire in the affirmative for history of coronary heart disease, angina, heart attack or stroke 
 Note: The Cardiovascular Health questionnaire was only administerd to adults age 40+.  The Medical History questionnaire was only administerd to adults age 20+.
 
-While the survey includes data for people of all ages, only data for adults (18+) have been considered here.
-Data has been excluded for individuals who did not complete the medical examinations (257 adults for 2016).
-Some features have been omitted due to a very high percentage of missing values or a very high class imbalance.
+## Models
 
 Initial model: Logistic Regression (without train-test-split) based on age and gender; hard classification had no value (all individuals predicted as low-risk); soft classification resulted in log_loss=0.29
 
