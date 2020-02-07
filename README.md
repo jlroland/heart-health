@@ -38,14 +38,24 @@ After all data cleaning and feature engineering was completed, the following mod
 
 ## Results
 
-Logistic regression appears to have the best predictive ability by a narrow margin.  The Random Forest Classifier and MLP Classifier performed approximately the same. The Gradient Boosting Classifier came in last.
+Logistic regression appears to have the best predictive ability by a narrow margin.  The Random Forest Classifier and MLP Classifier performed approximately the same. The Gradient Boosting Classifier seems least effective.
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
-Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at various probability thresholds.
+Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
 
-![Confusion matrices at different thresholds for logistic regression](img/cf_log.png)
+![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log.png)
+![Confusion matrix at threshold 0.75 for logistic regression](img/cf_log75.png)
 
+Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
+
+high-risk, correctly identified----------2,000
+high-risk, incorrectly indentified-------(-5,000)
+low-risk, correctly identified-----------0
+low-risk, incorrectly identified---------(-500)
+
+
+![Cost matrix at threshold 0.75 for logistic regression](img/cost_matrix.png)
 
 Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
 
