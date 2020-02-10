@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8">
 
-  <title>Predicting Risk of Cardiovascular Disease</title>
-  <meta name="description" content="Cardiovascular Risk Prediction Model">
-  <meta name="author" content="Jessica Roland">
+    <title>Predicting Risk of Cardiovascular Disease</title>
+    <meta name="description" content="Cardiovascular Risk Prediction Model">
+    <meta name="author" content="Jessica Roland">
 
-  <script src="{{ url_for('static', filename='brython.js')}}"></script>
-  <script src="{{ url_for('static', filename='brython_stdlib.js')}}"></script>
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <script src="{{ url_for('static', filename='brython.js')}}"></script>
+    <script src="{{ url_for('static', filename='brython_stdlib.js')}}"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.css') }}">
 
-</head>
-<body onload="brython()">
-  <script type="text/python" src="{{url_for('static', filename='brapp.py')}}"></script>
-  <h1>Are you currently high-risk for cardiovascular disease?</h1>
-  <p>Fill out your personal information below.</p>
-  <div>
-    <input id="age">
-    <input id="gender">
-    <input id="weight">
-    <input id="height">
-    <input id="">
-    <input id="">
-    <input id="">
-    <input id="">
-    <input id="">
-    <input id="">
-  </div>
-  <div>
-    <button type="button">Predict</button>
-  </div>
-  <div>
-    <p>You are currently: <span id="prediction"></span></p>
-  </div>
-</body>
+  </head>
+  <body onload="brython()">
+    <script type="text/python" src="{{url_for('static', filename='brapp.py')}}"></script>
+    <h1>Are you currently high-risk for cardiovascular disease?</h1>
+    <p>Please fill out your personal information below.</p>
+    <div>
+      <p>Age:</p><input id="age">
+      <p>Gender:</p><input id="gender">
+      <p>Height (in inches):</p><input id="height">
+      <p>Weight (in lbs):</p><input id="weight">
+      <p>Resting Pulse</p><input id="pulse">
+      <p>Number of frozen meals eaten in the last 30 days (estimated):</p><input id="frozen">
+      <p>Has a close relative ever had a heart attack?</p><input id="relative">
+      <p>Is your income more than $45,000 per year?</p><input id="income">
+      <p>Do you smoke?</p><input id="smoke">
+      <p>What is the most you have ever weighed?</p><input id="heaviest">
+    </div>
+    <div>
+      <button type="button" id="predict">Predict</button>
+    </div>
+    <div>
+      <p>You are currently: <span id="prediction"></span></p>
+    </div>
+  </body>
 </html>
