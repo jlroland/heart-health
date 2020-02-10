@@ -13,15 +13,15 @@ def get_input_data():
   smoke = document['smoke'].value
   heaviest = document['heaviest'].value
   return {'age': int(age),
-          'gender': ,
-          'height': float(height),
-          'weight': float(weight),
+          'gender': gender,
+          'height': float("{0:.2f}".format(height)),
+          'weight': float("{0:.2f}".format(weight)),
           'pulse': int(pulse),
           'frozen': int(frozen),
-          'relative': ,
-          'income': ,
-          'smoke': ,
-          'heaviest': float(heaviest)}
+          'relative': relative,
+          'income': income,
+          'smoke': smoke,
+          'heaviest': float("{0:.2f}".format(heaviest))}
 
 def display_prediction(req):
   result = json.loads(req.text)
