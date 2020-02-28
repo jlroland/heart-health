@@ -91,4 +91,6 @@ Oversampling the minority class in the training set increased recall from 0.03 t
 
 ![Confusion matrix at threshold 0.75 for logistic regression with oversampling](img/cf_log_upsample.png)
 
-Check out the website for your own prediction: Coming Soon!
+### Check out the website for your own prediction
+
+Coming Soon!
