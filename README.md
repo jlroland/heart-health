@@ -16,12 +16,14 @@ NHANES (National Health and Nutrition Examination Survey) is a naitonal survey c
 The data used in building this model comes from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
-There were 16 files used in compiling the data. The graphic below represents the amount of missing data (shown as white space) encountered in the original compilation (9971 observations, 521 features).
+There were 16 files used in compiling the data; these were stored in an AWS S3 bucket. The graphic below represents the amount of missing data (shown as white space) encountered in the original compilation (9971 observations, 521 features).
 ![Missing data before cleaning](img/missing_before.png)
 
 The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. features with 90% of values missing). After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
 
 ![Missing data after cleaning](img/missing_after.png)
+
+The remaining missing values were replaced using the KNNImputer from scikit-learn.
 
 Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
 
@@ -29,23 +31,25 @@ Individuals in the dataset have been labeled as high-risk for cardiovascular dis
 2. Answering the Medical History questionnaire in the affirmative for history of coronary heart disease, angina, heart attack or stroke 
 Note: The Cardiovascular Health questionnaire was only administerd to adults age 40+.  The Medical History questionnaire was only administerd to adults age 20+.
 
-## Models
+## Models--Round 1
 
-Multiple classification models were considered in order to classify individuals as high-risk (1) or not (0).  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used.
+Multiple classification models were considered in order to classify individuals as high-risk or not.  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used.
 
-The initial baseline model was a logistic regression (without normalization) based on age and gender. The ROC AUC score was 0.79.
+Initial EDA showed that age and gender would be a good starting point for a baseline model upon which to build.
 
 ![Looking at label distribution based on age & gender](img/initial_model_dist.png)
 
-After all data cleaning and feature engineering was completed, the following models were explored:
+The initial model (using age and gender) was a logistic regression without normalization and had an ROC AUC score of 0.79.
+
+Once a baseline was set, the following models were explored:
 
 1. Logistic Regression with L2 regularization using normalized data
-2. Random Forest Classifier with n_estimators=1000 and min_samples_split=10
+2. Random Forest Classifier with n_estimators=1000 and max_depth=2
 3. Gradient Boosting Classifier with n_estimators=1000 and max_depth=2
 4. MLP Classifier with hidden_layer_sizes=(100, 2) and a logistic activation function
 
 
-## Results
+## Results--Round 1
 
 Logistic regression appears to have the best predictive ability by a narrow margin.  The Random Forest Classifier and MLP Classifier performed approximately the same. The Gradient Boosting Classifier seems least effective.
 
@@ -53,7 +57,6 @@ Logistic regression appears to have the best predictive ability by a narrow marg
 
 Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
 
-![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log5.png)
 ![Confusion matrix at threshold 0.75 for logistic regression](img/cf_log75.png)
 
 Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
@@ -69,6 +72,17 @@ low-risk, incorrectly identified---------(-500)
 
 ![Cost matrix at threshold 0.75 for logistic regression](img/cost_matrix.png)
 
-### Do the models assign similar weights to the features when predicting class?  What are the strongest determinants of risk?
+## Models--Round 2
 
-![Feature comparison between logistic and RF](img/feature_importance.png)
+Based on previous results, it was clear that the models had difficulty predicting the positive case (i.e high-risk) due to class imbalance.  Given the relatively high cost associated with false negatives, the next goal was to improve recall by reducing class imbalance.  Therefore, the training data was subjected to oversampling of the minority class before fitting models again. The following models produced improvement in recall:
+
+1. Logistic Regression with L1 regularization using normalized data
+2. Random Forest Classifier with n_estimators=1000 and max_depth=2
+3. Gradient Boosting Classifier with n_estimators=1000 and max_depth=2
+
+
+## Results--Round 2
+
+Each of the models showed improvement, but logistic regression still performed best. The plot below shows the beta coefficients resulting from the updated logistic regression.
+
+![Feature importance for logistic regression](img/feature_importance.png)
