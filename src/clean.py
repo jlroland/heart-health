@@ -18,6 +18,9 @@ for key in key_list:
     response = s3.get_object(Bucket='health-survey-tables', Key=key)
     table = pd.concat([table, pd.read_csv(io.BytesIO(response['Body'].read())).set_index('SEQN')],
                       axis=1,verify_integrity=True)
+
+# msno.matrix(table)
+# plt.savefig('img/missing_before.png')
     
 adults = table[(table['RIDAGEYR']>=18) & (table['RIDSTATR']==2)]
 weight_2yrint = adults['WTINT2YR']
@@ -33,7 +36,7 @@ angina = adults[(adults['CDQ001'] == 1) & (adults['CDQ002'] == 1) & (adults['CDQ
 heart_history = adults[(adults['MCQ160C'] == 1) | (adults['MCQ160D'] == 1) | (adults['MCQ160E'] == 1)
                         | (adults['MCQ160F'] == 1)]
 
-cardio_risk = pd.Series(np.zeros(adults.shape[0]), index=adults.index)
+cardio_risk = pd.Series(np.zeros(adults.shape[0]), index=adults.index, name='cardio_risk')
 for num in angina.index:
     cardio_risk[num] = 1
 for num in heart_history.index:
@@ -43,7 +46,8 @@ for num in heart_history.index:
 adults.drop(adults.loc[:,'CDQ001':'CDQ010'], axis=1, inplace=True)
 adults.drop(adults.loc[:,'MCQ160B':'MCQ180F'], axis=1, inplace=True)
 
-adults['DMDEDUC2'][((adults['RIDAGEYR']==18) | (adults['RIDAGEYR']==19)) & (adults['DMDEDUC3']==15)] = 0
+adults['DMDEDUC2'][((adults['RIDAGEYR']==18) | (adults['RIDAGEYR']==19)) & (adults['DMDEDUC3']==15)] = 1
+adults['DMDEDUC2'][((adults['RIDAGEYR']==18) | (adults['RIDAGEYR']==19)) & (adults['DMDEDUC3']!=15)] = 0
 sys = adults[['BPXSY1', 'BPXSY2', 'BPXSY3', 'BPXSY4']]
 dia = adults[['BPXDI1', 'BPXDI2', 'BPXDI3', 'BPXDI4']]
 adults['AVGSYS'] = np.nanmean(sys, axis=1)
@@ -146,7 +150,7 @@ adults['DSDCOUNT'][(adults['DSDCOUNT'] == 99) | (adults['DSDCOUNT'] == 77)] = ro
 adults['DSD010AN'][adults['DSD010AN'] > 1] = 0
 adults['WHQ225'][adults['WHQ225'] >= 5] = 0
 adults['WHQ225'][adults['WHQ225'] < 5] = 1
-adults['DMDYRSUS'][adults['DMDYRSUS'] >= 4] = 1
+adults['DMDYRSUS'][(adults['DMDYRSUS'] >= 4) | (pd.isna(adults['DMDYRSUS']))] = 1
 adults['DMDYRSUS'][adults['DMDYRSUS'] < 4] = 0
 adults['DMDMARTL'][(adults['DMDMARTL'] <= 4) | (adults['DMDMARTL'] == 77)] = 1
 adults['DMDMARTL'][(adults['DMDMARTL'] > 4) | (pd.isna(adults['DMDMARTL']))] = 0
@@ -184,6 +188,12 @@ diet_health = pd.get_dummies(adults['DBQ700'], prefix='diet_health')
 milk = pd.get_dummies(adults['DBQ197'], prefix='milk')
 data = pd.concat([adults, race, diet_health, milk], axis=1)
 data.drop(['RIDRETH3', 'DBQ700', 'DBQ197'], axis=1, inplace=True)
+
+# msno.matrix(data)
+# plt.savefig('img/missing_after.png')
+
+# msno.dendrogram(adults)
+# plt.savefig('img/dendrogram.png')
 
 '''
 initial drop--

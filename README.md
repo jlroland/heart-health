@@ -16,7 +16,7 @@ NHANES (National Health and Nutrition Examination Survey) is a naitonal survey c
 The data used in building this model comes from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
-The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to 46 variables to use as features in this model.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. data with 5,000 missing values).
+The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in this model.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. data with 5,000 missing values).
 
 Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
 
