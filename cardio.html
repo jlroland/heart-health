@@ -18,19 +18,45 @@
   <div>
     <p>Age:</p><input id="age">
     <div>
-    <label for="gender">Choose your gender:</label>
-    <select id="gender">
-      <option value="1">Male</option>
-      <option value="0">Female</option>
-    </select>
+      <label for="gender">Choose your gender:</label>
+      <input type="radio" id="male" name="gender" value="1">
+      <label for="male">Male</label>
+      <input type="radio" id="female" name="gender" value="0">
+      <label for="female">Female</label><br>
     </div>
+    <div>
+      <label for="race">Choose your race:</label>
+      <select id="race">
+      <option value="1">Mexican American</option>
+      <option value="2">Other Hispanic</option>
+      <option value="3">Non-Hispanic White</option>
+      <option value="4">Non-Hispanic Black</option>
+      <option value="6">Non-Hispanic Asian</option>
+      <option value="7">Other/Multi-Racial</option>
+      </select>
+    </div>  
     <p>Height (in inches):</p><input id="height">
     <p>Weight (in lbs):</p><input id="weight">
+    <p>What is the most you have ever weighed? (in lbs)</p><input id="heaviest">
     <p>Resting Pulse (beats/minute)</p><input id="pulse">
     <p>Number of frozen meals eaten in the last 30 days (estimated):</p><input id="frozen">
-    <p>Has a close relative ever had a heart attack? (Y or N)</p><input id="relative">
-    <p>Do you smoke? (Y or N)</p><input id="smoke">
-    <p>What is the most you have ever weighed?(in lbs)</p><input id="heaviest">
+    <div>
+      <p>Has a close relative ever had a heart attack?</p>
+      <input type="radio" id="yes_heart" name="heart" value="1">
+      <label for="yes_heart">Yes</label><br>
+      <input type="radio" id="no_heart" name="heart" value="0">
+      <label for="no_heart">No</label><br>
+    </div>
+    <div>
+      <p>Do you smoke?</p>
+      <input type="radio" id="yes_smoke" name="smoke" value="1">
+      <label for="yes_smoke">Yes</label><br>
+      <input type="radio" id="no_smoke" name="smoke" value="0">
+      <label for="no_smoke">No</label><br>
+    </div>
+    <p>Have you ever been told by a doctor or other health professional that you had high blood pressure?</p>
+    <p>Have you ever been told by a doctor or health professional to reduce the amount of sodium or salt in your diet?</p>
+    <p>Over the past 30 days, how many hours per day (on average) did you watch TV or videos?</p><input id="tv">
   </div>
   <div>
     <button type="button" id="predict">Predict</button>

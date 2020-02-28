@@ -12,11 +12,16 @@ These risks, combined with the ever-increasing cost of healthcare in the U.S., i
 
 ## Data
 
-NHANES (National Health and Nutrition Examination Survey) is a naitonal survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables, asking questions about lifestyle and medical history as well as conducting brief medical examinations and running blood tests.
+NHANES (National Health and Nutrition Examination Survey) is a naitonal survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history as well as conducting brief medical examinations and running blood tests.
 The data used in building this model comes from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
-The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in this model.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. data with 5,000 missing values).
+There were 16 files used in compiling the data. The graphic below represents the amount of missing data (shown as white space) encountered in the original compilation (9971 observations, 521 features).
+![Missing data before cleaning](img/missing_before.png)
+
+The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. features with 90% of values missing). After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
+
+![Missing data after cleaning](img/missing_after.png)
 
 Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
 
