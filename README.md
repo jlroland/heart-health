@@ -74,7 +74,7 @@ low-risk, incorrectly identified---------(-500)
 
 ## Models--Round 2
 
-Based on previous results, it was clear that the models had difficulty predicting the positive case (i.e high-risk) due to class imbalance.  Given the relatively high cost associated with false negatives, the next goal was to improve recall by reducing class imbalance.  Therefore, the training data was subjected to oversampling of the minority class before fitting models again. The following models produced improvement in recall:
+Based on previous results, it was clear that the models had difficulty predicting the positive case (i.e high-risk) due to class imbalance.  Given the relatively high cost associated with false negatives, the next goal was to increase recall by reducing class imbalance.  Therefore, the training data was subjected to oversampling of the minority class before fitting models again. The following models produced improvement in recall:
 
 1. Logistic Regression with L1 regularization using normalized data
 2. Random Forest Classifier with n_estimators=1000 and max_depth=2
@@ -86,3 +86,9 @@ Based on previous results, it was clear that the models had difficulty predictin
 Each of the models showed improvement, but logistic regression still performed best. The plot below shows the beta coefficients resulting from the updated logistic regression.
 
 ![Feature importance for logistic regression](img/feature_importance.png)
+
+Oversampling the minority class in the training set increased recall from 0.03 to 0.58.  The corresponding trade-off was a decrease in precision from 0.5 to 0.39.  These results were based on a probability threshold of 0.75; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
+
+![Confusion matrix at threshold 0.75 for logistic regression with oversampling](img/cf_log_upsample.png)
+
+Check out the website for your own prediction: Coming Soon!
