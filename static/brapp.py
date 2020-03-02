@@ -3,26 +3,43 @@ import json
 
 def get_input_data():
   age = document['age'].value
-  gender = document['gender'].value
+  print(age)
+  gender = 0
+  print(gender)
   race = document['race'].value
+  print(race)
   height = document['height'].value
+  print(height)
   weight = document['weight'].value
+  print(weight)
   pulse = document['pulse'].value
+  print(pulse)
   heaviest = document['heaviest'].value
+  print(heaviest)
   smoke = document['smoke'].value
+  print(smoke)
   age_smoke = document['age_smoke'].value
-  pressure = document['bp'].value
+  print(age_smoke)
+  pressure = document['pressure'].value
+  print(pressure)
   salt = document['salt'].value
+  print(salt)
   relative = document['relative'].value
+  print(relative)
   food = document['food'].value
+  print(food)
   milk = document['milk'].value
+  print(milk)
   supps = document['supps'].value
+  print(supps)
   tv = document['tv'].value
+  print(tv)
   income = document['income'].value
+  print(income)
   
   return {'age': int(age),
           'gender': gender,
-          'race': race,
+          'race': int(race),
           'height': float(height),
           'weight': float(weight),
           'pulse': int(pulse),
