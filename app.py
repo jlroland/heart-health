@@ -29,10 +29,12 @@ def _model_prediction(income, pulse, age_smoke, race, height, weight, supps, foo
   X = np.array([income, pulse, age_smoke, race1, bmi, supps, food, race6, race4, race3, race2, milk, gender, race7, smoke, salt, pressure, tv, relative, heaviest, age]).reshape(1, -1)
   scaled = MinMaxScaler()
   X_scaled = scaled.fit_transform(X)
-  y_hat = model.predict_proba(X_scaled)[:,1]
-  if y_hat > 0.5:
+  y_hat = model.predict_proba(X_scaled)
+  print(y_hat)
+  print(model.classes_)
+  if y_hat[:,1] > 0.5:
     return 'high-risk'
-  else:
+  elif y_hat[:,1] <= 0.5:
     return 'low-risk'
 
 def _clean_data(income, tv, heaviest, height, weight, race):
