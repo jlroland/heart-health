@@ -19,15 +19,14 @@ def predict():
   user_data = request.json
   age, gender, height, weight, pulse = user_data['age'], user_data['gender'], user_data['height'], user_data['weight'], user_data['pulse']
   food, relative, smoke, heaviest = user_data['food'], user_data['relative'], user_data['smoke'], user_data['heaviest']
-  race, pressure, salt, supps, tv, income = user_data['race'], user_data['pressure'], user_data['salt'], user_data['supps'], user_data['tv'], user_data['income']
-  risk = _model_prediction(income, pulse, 'SMD030', 'race_1.0', height, weight, supps, food, 'race_6.0',
-       'race_4.0', 'race_3.0', 'race_2.0', 'milk_0.0', gender, 'race_7.0', 'SMQ020', salt, pressure,
-       'PAQ710', relative, heaviest, age)
+  race, pressure, salt, supps, tv = user_data['race'], user_data['pressure'], user_data['salt'], user_data['supps'], user_data['tv']
+  age_smoke, milk, income = user_data['age_smoke'], user_data['milk'], user_data['income']
+  risk = _model_prediction(income, pulse, age_smoke, race, height, weight, supps, food, milk, gender, smoke, salt, pressure, tv, relative, heaviest, age)
   return jsonify({'risk': risk})
 
-def _model_prediction(age, gender, height, weight, pulse, frozen, relative, smoke, heaviest):
-  bmi = _clean_data(height, weight)
-  X = np.array([age, gender, bmi, pulse, frozen, relative, smoke, heaviest]).reshape(1, -1)
+def _model_prediction(income, pulse, age_smoke, race, height, weight, supps, food, milk, gender, smoke, salt, pressure, tv, relative, heaviest, age):
+  income, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7 = _clean_data(income, tv, heaviest, height, weight, race)
+  X = np.array([income, pulse, age_smoke, race1, bmi, supps, food, race6, race4, race3, race2, milk, gender, race7, smoke, salt, pressure, tv, relative, heaviest, age]).reshape(1, -1)
   scaled = MinMaxScaler()
   X_scaled = scaled.fit_transform(X)
   y_hat = model.predict_proba(X_scaled)[:,1]
@@ -36,10 +35,15 @@ def _model_prediction(age, gender, height, weight, pulse, frozen, relative, smok
   else:
     return 'low-risk'
 
-def _clean_data(height, weight):
-  
+def _clean_data(income, tv, heaviest, height, weight, race):
+  race_array = np.zeros(6)
+  race_array[race-1] = 1
+  race1, race2, race3, race4, race6, race7 = race_array
+  poverty_ratio = income/20000
+  tv = round(tv,1)
+  heaviest = round(heaviest,1)
   bmi = (weight*0.453592)/(height*0.0254)**2
-  return bmi
+  return poverty_ratio, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7
 
 if __name__ == '__main__':
   app.run(host='0.0.0.0', port=8000, debug=True)

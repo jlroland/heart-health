@@ -10,10 +10,12 @@ def get_input_data():
   pulse = document['pulse'].value
   heaviest = document['heaviest'].value
   smoke = document['smoke'].value
+  age_smoke = document['age_smoke'].value
   pressure = document['bp'].value
   salt = document['salt'].value
   relative = document['relative'].value
   food = document['food'].value
+  milk = document['milk'].value
   supps = document['supps'].value
   tv = document['tv'].value
   income = document['income'].value
@@ -26,10 +28,12 @@ def get_input_data():
           'pulse': int(pulse),
           'heaviest': float(heaviest),
           'smoke': smoke,
+          'age_smoke': int(age_smoke),
           'pressure': pressure,
           'salt': salt,
           'relative': relative,
           'food': int(food),
+          'milk': milk,
           'supps': int(supps),
           'tv': float(tv),
           'income': float(income),
