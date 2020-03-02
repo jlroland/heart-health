@@ -4,28 +4,40 @@ import json
 def get_input_data():
   age = document['age'].value
   gender = document['gender'].value
+  race = document['race'].value
   height = document['height'].value
   weight = document['weight'].value
   pulse = document['pulse'].value
-  frozen = document['frozen'].value
-  relative = document['relative'].value
-  income = document['income'].value
-  smoke = document['smoke'].value
   heaviest = document['heaviest'].value
+  smoke = document['smoke'].value
+  pressure = document['bp'].value
+  salt = document['salt'].value
+  relative = document['relative'].value
+  food = document['food'].value
+  supps = document['supps'].value
+  tv = document['tv'].value
+  income = document['income'].value
+  
   return {'age': int(age),
           'gender': gender,
-          'height': float("{0:.2f}".format(height)),
-          'weight': float("{0:.2f}".format(weight)),
+          'race': race,
+          'height': float(height),
+          'weight': float(weight),
           'pulse': int(pulse),
-          'frozen': int(frozen),
-          'relative': relative,
-          'income': income,
+          'heaviest': float(heaviest),
           'smoke': smoke,
-          'heaviest': float("{0:.2f}".format(heaviest))}
+          'pressure': pressure,
+          'salt': salt,
+          'relative': relative,
+          'food': int(food),
+          'supps': int(supps),
+          'tv': float(tv),
+          'income': float(income),
+          }
 
 def display_prediction(req):
   result = json.loads(req.text)
-  document['prediction'].html = f"{result['risk']}"
+  document['prediction'].html = result['risk']
 
 def send_input_data(data):
   req = ajax.Ajax()

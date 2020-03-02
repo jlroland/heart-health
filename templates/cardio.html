@@ -17,6 +17,7 @@
   <p>Please fill out your personal information below.</p>
   <div>
     <p>Age:</p><input id="age">
+
     <div>
       <label for="gender">Choose your gender:</label>
       <input type="radio" id="male" name="gender" value="1">
@@ -24,9 +25,11 @@
       <input type="radio" id="female" name="gender" value="0">
       <label for="female">Female</label><br>
     </div>
+
     <div>
       <label for="race">Choose your race:</label>
       <select id="race">
+      <option value="">Select One</option>
       <option value="1">Mexican American</option>
       <option value="2">Other Hispanic</option>
       <option value="3">Non-Hispanic White</option>
@@ -34,29 +37,47 @@
       <option value="6">Non-Hispanic Asian</option>
       <option value="7">Other/Multi-Racial</option>
       </select>
-    </div>  
+    </div> 
+
     <p>Height (in inches):</p><input id="height">
+
     <p>Weight (in lbs):</p><input id="weight">
-    <p>What is the most you have ever weighed? (in lbs)</p><input id="heaviest">
+
     <p>Resting Pulse (beats/minute)</p><input id="pulse">
-    <p>Number of frozen meals eaten in the last 30 days (estimated):</p><input id="frozen">
-    <div>
-      <p>Has a close relative ever had a heart attack?</p>
-      <input type="radio" id="yes_heart" name="heart" value="1">
-      <label for="yes_heart">Yes</label><br>
-      <input type="radio" id="no_heart" name="heart" value="0">
-      <label for="no_heart">No</label><br>
-    </div>
-    <div>
-      <p>Do you smoke?</p>
-      <input type="radio" id="yes_smoke" name="smoke" value="1">
-      <label for="yes_smoke">Yes</label><br>
-      <input type="radio" id="no_smoke" name="smoke" value="0">
-      <label for="no_smoke">No</label><br>
-    </div>
+
+    <p>What is the most you have ever weighed? (in lbs)</p><input id="heaviest">
+
+    <p>Do you smoke?</p>
+    <input type="radio" id="yes_smoke" name="smoke" value="1">
+    <label for="yes_smoke">Yes</label><br>
+    <input type="radio" id="no_smoke" name="smoke" value="0">
+    <label for="no_smoke">No</label><br>
+
     <p>Have you ever been told by a doctor or other health professional that you had high blood pressure?</p>
+    <input type="radio" id="yes_bp" name="bp" value="1">
+    <label for="yes_bp">Yes</label><br>
+    <input type="radio" id="no_bp" name="bp" value="0">
+    <label for="no_bp">No</label><br>
+
     <p>Have you ever been told by a doctor or health professional to reduce the amount of sodium or salt in your diet?</p>
+    <input type="radio" id="yes_salt" name="salt" value="1">
+    <label for="yes_salt">Yes</label><br>
+    <input type="radio" id="no_salt" name="salt" value="0">
+    <label for="no_salt">No</label><br>
+
+    <p>Has a close relative ever had a heart attack?</p>
+    <input type="radio" id="yes_heart" name="heart" value="1">
+    <label for="yes_heart">Yes</label><br>
+    <input type="radio" id="no_heart" name="heart" value="0">
+    <label for="no_heart">No</label><br>
+
+    <p>Number of meals not home-prepared in the last 30 days (estimated):</p><input id="food">
+
+    <p>How many different dietary supplements do you take?:</p><input id="supps">
+    
     <p>Over the past 30 days, how many hours per day (on average) did you watch TV or videos?</p><input id="tv">
+
+    <p>Annual income</p><input id="income">
   </div>
   <div>
     <button type="button" id="predict">Predict</button>
