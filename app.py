@@ -46,4 +46,4 @@ def _clean_data(income, tv, heaviest, height, weight, race):
   return poverty_ratio, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7
 
 if __name__ == '__main__':
-  app.run(host='0.0.0.0', port=80, debug=True)
+  app.run(host='0.0.0.0', port=22, debug=True)
