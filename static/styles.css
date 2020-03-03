@@ -1,8 +1,33 @@
 body {
-  background-color: rgb(127, 214, 255);
+  background-color: rgb(162, 191, 243);
   text-align: center;
 }
 
 .question {
   padding: 10px;
+  border-bottom: black;
+  box-shadow: 1px 1px black;
+  margin-bottom: 20px;
+}
+
+.prediction {
+  padding: 10px;
+}
+
+h1 {
+  border-bottom: black;
+  padding-bottom: 10px;
+  box-shadow: 2px 2px black;
+}
+
+p {
+  font-size: 20px;
+}
+
+label {
+  font-size: 20px;
+}
+
+button {
+  padding: 8px;
 }

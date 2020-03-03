@@ -1,4 +1,4 @@
-# Help Your Heart
+# The Heart of the Matter
 
 ## Introduction
 

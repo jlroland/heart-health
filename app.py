@@ -32,9 +32,9 @@ def _model_prediction(income, pulse, age_smoke, race, height, weight, supps, foo
   y_hat = model.predict_proba(X)
   print(y_hat)
   if y_hat[:,1] > 0.5:
-    return 'high-risk'
+    return 'HIGH-RISK'
   elif y_hat[:,1] <= 0.5:
-    return 'low-risk'
+    return 'NOT HIGH-RISK'
 
 def _clean_data(income, tv, heaviest, height, weight, race):
   race_array = np.zeros(6)
