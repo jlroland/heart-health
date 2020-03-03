@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import pickle
 import numpy as np
 import pandas as pd
+from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import MinMaxScaler
 
@@ -27,11 +28,8 @@ def predict():
 def _model_prediction(income, pulse, age_smoke, race, height, weight, supps, food, milk, gender, smoke, salt, pressure, tv, relative, heaviest, age):
   income, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7 = _clean_data(income, tv, heaviest, height, weight, race)
   X = np.array([income, pulse, age_smoke, race1, bmi, supps, food, race6, race4, race3, race2, milk, gender, race7, smoke, salt, pressure, tv, relative, heaviest, age]).reshape(1, -1)
-  scaled = MinMaxScaler()
-  X_scaled = scaled.fit_transform(X)
-  y_hat = model.predict_proba(X_scaled)
+  y_hat = model.predict_proba(X)
   print(y_hat)
-  print(model.classes_)
   if y_hat[:,1] > 0.5:
     return 'high-risk'
   elif y_hat[:,1] <= 0.5:
