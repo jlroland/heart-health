@@ -1,3 +1,8 @@
 body {
-  background-color: rgb(255, 221, 127);
+  background-color: rgb(127, 214, 255);
+  text-align: center;
+}
+
+div {
+  padding: 10px;
 }
