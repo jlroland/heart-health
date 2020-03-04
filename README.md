@@ -12,7 +12,7 @@ These risks, combined with the ever-increasing cost of healthcare in the U.S., i
 
 ## Data
 
-NHANES (National Health and Nutrition Examination Survey) is a naitonal survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history as well as conducting brief medical examinations and running blood tests.
+NHANES (National Health and Nutrition Examination Survey) is a national survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history as well as conducting brief medical examinations and running blood tests.
 The data used in building this model comes from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 

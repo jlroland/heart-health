@@ -15,7 +15,8 @@
 <body onload="brython()">
   <script type="text/python" src="{{ url_for('static', filename='brapp.py') }}"></script>
   <h1>Do you currently have high risk for cardiovascular disease?</h1>
-  <p>Please fill out the questionnaire below.</p>
+  <img src="{{ url_for('static', filename='heartbeat.png') }}" alt="Decorative EKG">
+  <p>Please fill out the questionnaire below. All fields are required.</p>
   <div>
     <div class="question"><p>Age:</p><input id="age"></div>
 

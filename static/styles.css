@@ -1,13 +1,14 @@
 body {
-  background-color: rgb(162, 191, 243);
+  background-color: #D7CEC7;
   text-align: center;
 }
 
 .question {
   padding: 10px;
-  border-bottom: black;
-  box-shadow: 1px 1px black;
+  border-bottom: #565656;
+  box-shadow: 1px 1px #76323F;
   margin-bottom: 20px;
+  color: #565656;
 }
 
 .prediction {
@@ -15,9 +16,10 @@ body {
 }
 
 h1 {
-  border-bottom: black;
+  /* border-bottom: #565656; */
   padding-bottom: 10px;
-  box-shadow: 2px 2px black;
+  /* box-shadow: 2px 2px #76323F; */
+  color: #76323F
 }
 
 p {
@@ -30,4 +32,11 @@ label {
 
 button {
   padding: 8px;
+}
+
+img {
+  width: 1200px;
+  height: 100px;
+  margin: 10px;
+  box-shadow: 5px 5px #76323F;
 }
