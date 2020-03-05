@@ -74,6 +74,14 @@ Oversampling the minority class and training the model on the top features incre
 
 ![Confusion matrix at threshold 0.5 for logistic regression with oversampling](img/cf_log_upsample_limited.png)
 
+## What I Learned
+
+Data quality is the first underlying concern.  Even when surveys are highly-structured and planned carefully, there is plenty of room for error and missing values.  Survey data was used in building this model because it is publicly available, but I suspect the model could be improved by using data from targeted medical research (which is usually restricted from public use).
+
+Class imbalance is the enemy and must be destroyed!  The first models I trained were inclined to predict that no individuals were high-risk.  Implementing a resampling scheme when imbalance exists, whether it's undersampling the majority, oversampling the minority or SMOTE, will greatly benefit the training of the model.  This is especially true when you would prefer to skew your error toward false positives rather than false negatives.
+
+Be mindful of the practical application of the model.  This helps you judge which metrics to use in evaluating potential models--in this case, recall was more important than log loss or AUC because false negatives are especially costly.  It will also guide you in deciding what trade-offs are acceptable.  In this case, health professionals would need to be involved in deciding the acceptable threshold at which the false negatives are low enough to justify the corresponding increase in false positives; the costs associated with these types of error are not equivalent.
+
 ### Check out the website for your own prediction
 
 Coming Soon!
