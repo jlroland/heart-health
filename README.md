@@ -2,11 +2,11 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="200" height="100" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="200" height="120" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
-NHANES (National Health and Nutrition Examination Survey) is a national survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history as well as conducting brief medical examinations and running blood tests.
+NHANES (National Health and Nutrition Examination Survey) is a national survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history, as well as conducting brief medical examinations and running blood tests.
 The data used in building this model comes from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
@@ -27,7 +27,7 @@ Note: The Cardiovascular Health questionnaire was only administerd to adults age
 
 ## Models--Round 1
 
-Multiple classification models were considered in order to classify individuals as high-risk or not.  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used.
+Multiple classification models were considered in order to classify individuals as high-risk or not.  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used. The classification probability threshold was set at 0.5 while examining relative performance between models.
 
 Initial EDA showed that age and gender would be a good starting point for a baseline model upon which to build.
 
@@ -45,7 +45,7 @@ Once a baseline was set, the following models were explored:
 
 ## Results--Round 1
 
-Logistic regression appears to have the best predictive ability by a narrow margin.  The Random Forest Classifier and MLP Classifier performed approximately the same. The Gradient Boosting Classifier seems least effective.
+All models performed similarly based on typcial metrics like log loss and AUC score.  Logistic regression appears to have the best predictive ability by a narrow margin.
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
@@ -54,17 +54,6 @@ Since logistic regression produced the best metrics, a confusion matrix was cons
 ![Confusion matrix at threshold 0.75 for logistic regression](img/cf_log75.png)
 
 Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
-
-high-risk, correctly identified----------2,000
-
-high-risk, incorrectly indentified-------(-5,000)
-
-low-risk, correctly identified-----------0
-
-low-risk, incorrectly identified---------(-500)
-
-
-![Cost matrix at threshold 0.75 for logistic regression](img/cost_matrix.png)
 
 ## Models--Round 2
 
