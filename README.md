@@ -76,7 +76,7 @@ Oversampling the minority class and training the model on the top features incre
 
 ## What I Learned
 
-Data quality is the first underlying concern.  Even when surveys are highly-structured and planned carefully, there is plenty of room for error and missing values.  Survey data was used in building this model because it is publicly available, but I suspect the model could be improved by using data from targeted medical research (which is usually restricted from public use).
+<img align="left" width="200" height="120" src="img/melement5-digital-OyCl7Y4y0Bk-unsplash.png">Data quality is the first underlying concern.  Even when surveys are highly-structured and planned carefully, there is plenty of room for error and missing values.  Survey data was used in building this model because it is publicly available, but I suspect the model could be improved by using data from targeted medical research (which is usually restricted from public use).
 
 Class imbalance is the enemy and must be destroyed!  The first models I trained were inclined to predict that no individuals were high-risk.  Implementing a resampling scheme when imbalance exists, whether it's undersampling the majority, oversampling the minority or SMOTE, will greatly benefit the training of the model.  This is especially true when you would prefer to skew your error toward false positives rather than false negatives.
 
