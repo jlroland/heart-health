@@ -49,11 +49,11 @@ All models performed similarly based on typcial metrics like log loss and AUC sc
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
-Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
+Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.
 
-![Confusion matrix at threshold 0.75 for logistic regression](img/cf_log75.png)
+![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log5.png)
 
-Trying to assign dollar values under these circumstances is especially tricky.  Values have been assigned here for a cost matrix based on comparative weights of outcomes, not real-world monetary values.
+The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
 
 ## Models--Round 2
 
@@ -66,13 +66,13 @@ Based on previous results, it was clear that the models had difficulty predictin
 
 ## Results--Round 2
 
-Each of the models showed improvement, but logistic regression still performed best. The plot below shows the beta coefficients resulting from the updated logistic regression.
+Each of the models showed improvement, but logistic regression still performed best. The plot below shows the beta coefficients for the top features resulting from the updated logistic regression.
 
-![Feature importance for logistic regression](img/feature_importance.png)
+![Most important features by feature importance for logistic regression](img/feature_importance_reduced.png)
 
 Oversampling the minority class in the training set increased recall from 0.03 to 0.58.  The corresponding trade-off was a decrease in precision from 0.5 to 0.39.  These results were based on a probability threshold of 0.75; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
 
-![Confusion matrix at threshold 0.75 for logistic regression with oversampling](img/cf_log_upsample.png)
+![Confusion matrix at threshold 0.5 for logistic regression with oversampling](img/cf_log_upsample_limited.png)
 
 ### Check out the website for your own prediction
 
