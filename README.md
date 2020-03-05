@@ -7,19 +7,19 @@
 ## Data
 
 NHANES (National Health and Nutrition Examination Survey) is a national survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history, as well as conducting brief medical examinations and running blood tests.
-The data used in building this model comes from the 2015-2016 survey and can be found at:  
+The data used in building this model was taken from the 2015-2016 survey and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
 There were 16 files used in compiling the data; these were stored in an AWS S3 bucket. The graphic below represents the amount of missing data (shown as white space) encountered in the original compilation (9971 observations, 521 features).
 ![Missing data before cleaning](img/missing_before.png)
 
-The data has been limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. features with 90% of values missing). After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
+The data was limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. features with 90% of values missing). After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
 
 ![Missing data after cleaning](img/missing_after.png)
 
 The remaining missing values were replaced using the KNNImputer from scikit-learn.
 
-Individuals in the dataset have been labeled as high-risk for cardiovascular disease based on either:
+Individuals in the dataset were labeled as high-risk for cardiovascular disease based on either:
 
 1. A combination of answers to the Cardiovascular Health questionnaire which indicate symptoms of angina, or
 2. Answering the Medical History questionnaire in the affirmative for history of coronary heart disease, angina, heart attack or stroke 
@@ -45,15 +45,15 @@ Once a baseline was set, the following models were explored:
 
 ## Results--Round 1
 
-All models performed similarly based on typcial metrics like log loss and AUC score.  Logistic regression appears to have the best predictive ability by a narrow margin.
+All models performed similarly based on typcial metrics like log loss and ROC AUC score.  Logistic regression appeared to have the best predictive ability by a narrow margin.
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
-Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.
+Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The confusion matrix at threshold 0.5 is shown below.
 
 ![Confusion matrix at threshold 0.5 for logistic regression](img/cf_log5.png)
 
-The false negative rate, even at lower thresholds, indicates that implementing this model would be impractical due to the high cost associated with false negatives.
+The false negative rate, even at lower thresholds, indicated that implementing this model would be impractical due to the high cost associated with false negatives.  The model needed greater ability to predict the high-risk label.
 
 ## Models--Round 2
 
@@ -66,11 +66,11 @@ Based on previous results, it was clear that the models had difficulty predictin
 
 ## Results--Round 2
 
-Each of the models showed improvement, but logistic regression still performed best. The plot below shows the beta coefficients for the top features resulting from the updated logistic regression.
+Each model showed an increase in log loss, and the ROC AUC scores showed little change from the first round of models.  Each of the models showed improvement in reducing false negatives, but logistic regression still performed best. The plot below shows the beta coefficients for the top features resulting from the updated logistic regression.
 
 ![Most important features by feature importance for logistic regression](img/feature_importance_reduced.png)
 
-Oversampling the minority class in the training set increased recall from 0.03 to 0.58.  The corresponding trade-off was a decrease in precision from 0.5 to 0.39.  These results were based on a probability threshold of 0.75; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
+Oversampling the minority class and training the model on the top features increased recall from 0.17 to 0.81.  The corresponding trade-off was a decrease in precision from 0.5 to 0.28.  These results were based on a probability threshold of 0.5; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
 
 ![Confusion matrix at threshold 0.5 for logistic regression with oversampling](img/cf_log_upsample_limited.png)
 
