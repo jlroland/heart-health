@@ -84,4 +84,4 @@ Be mindful of the practical application of the model.  This helps you judge whic
 
 ### Check out the website for your own prediction
 
-Click [here](44.232.41.241) to visit the website.
+Click [here](http://44.232.41.241) to visit the website.
