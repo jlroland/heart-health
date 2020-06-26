@@ -6,17 +6,17 @@ from sklearn.pipeline import Pipeline
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import MinMaxScaler
 
-application = Flask(__name__)
-application.config['TEMPLATES_AUTO_RELOAD'] = True
+app = Flask(__name__)
+app.config['TEMPLATES_AUTO_RELOAD'] = True
 
-@application.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def index():
   return render_template('cardio.html')
 
 pickle_file = open('model.pickle', 'rb')
 model = pickle.load(pickle_file)
 
-@application.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
   user_data = request.json
   age, gender, height, weight, pulse = user_data['age'], user_data['gender'], user_data['height'], user_data['weight'], user_data['pulse']
@@ -47,4 +47,4 @@ def _clean_data(income, tv, heaviest, height, weight, race):
   return poverty_ratio, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7
 
 if __name__ == '__main__':
-  application.run()
+  app.run()
