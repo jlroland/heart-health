@@ -10,18 +10,22 @@
   <script src="{{ url_for('static', filename='brython_stdlib.js')}}"></script>
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='bootstrap.css') }}">
   <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-
+  <!-- <link rel="stylesheet" href="../static/bootstrap.css">
+  <link rel="stylesheet" href="../static/styles.css"> -->
 </head>
 <body onload="brython()">
   <script type="text/python" src="{{ url_for('static', filename='brapp.py') }}"></script>
-  <h1>THE HEART OF THE MATTER</h1>
-  <img src="{{ url_for('static', filename='heartbeat.png') }}" alt="Decorative EKG">
-  <h2>Do you currently have high risk for cardiovascular disease?</h2>
-  <p>Fill out this questionnaire to find out. All fields are required.</p>
+  <div class="heading">
+    <h1>THE HEART OF THE MATTER</h1>
+    <img src="{{ url_for('static', filename='heartbeat.png') }}" alt="Decorative EKG">
+    <!-- <img src="../static/heartbeat.png" alt="Decorative EKG"> -->
+    <h2>Do you currently have high risk for cardiovascular disease?</h2>
+    <p>Fill out this questionnaire to find out. All fields are required.</p>
+  </div>
   <div class="main">
-    <div class="question"><p>Age:</p><input id="age"></div>
+    <div class="question"><p>Age (in years):</p><input id="age"></div>
 
-    <div class="question"><p>Annual income</p><input id="income"></div>
+    <div class="question"><p>Annual income (in US$)</p><input id="income"></div>
     
     <div class="question">
       <label for="gender">Choose your gender:</label>
@@ -112,7 +116,9 @@
     <button type="button" id="predict">Predict</button>
   </div>
   <div class="prediction">
-    <p>You are currently: <span id="prediction"></span></p>
+    <p>You are currently: <span id="prediction"></span><sup>*</sup></p>
   </div>
+  <p class="disclaimer">* Not an official medical diagnosis. The training data used in developing this model comes from self-reported survey data, making it especially susceptible to error. This application was developed to demonstrate potential uses for machine learning in healthcare.</p>
+  <p class = "disclaimer">NOTE: The classification system used here categorizes individuals as "high risk" or "not high risk" based on the probability threshold selected during model evaluation. Please keep in mind that "not high risk" does not necessarily equate to "low risk" in a model such as this one. Details regarding the model can be found at <a href="https://github.com/jlroland/heart-of-the-matter">this Github repository</a>.</p>
 </body>
 </html>
