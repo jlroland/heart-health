@@ -1,7 +1,5 @@
 data/
 data_2016/
-virt
-requirements.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

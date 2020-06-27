@@ -14,12 +14,15 @@
 </head>
 <body onload="brython()">
   <script type="text/python" src="{{ url_for('static', filename='brapp.py') }}"></script>
-  <h1>Do you currently have high risk for cardiovascular disease?</h1>
+  <h1>THE HEART OF THE MATTER</h1>
   <img src="{{ url_for('static', filename='heartbeat.png') }}" alt="Decorative EKG">
-  <p>Please fill out the questionnaire below. All fields are required.</p>
+  <h2>Do you currently have high risk for cardiovascular disease?</h2>
+  <p>Fill out this questionnaire to find out. All fields are required.</p>
   <div>
     <div class="question"><p>Age:</p><input id="age"></div>
 
+    <div class="question"><p>Annual income</p><input id="income"></div>
+    
     <div class="question">
       <label for="gender">Choose your gender:</label>
       <select id="gender">
@@ -46,9 +49,9 @@
 
     <div class="question"><p>Weight (in lbs):</p><input id="weight"></div>
 
-    <div class="question"><p>Resting Pulse (beats/minute)</p><input id="pulse"></div>
-
     <div class="question"><p>What is the most you have ever weighed? (in lbs)</p><input id="heaviest"></div>
+
+    <div class="question"><p>Resting Pulse (beats/minute)</p><input id="pulse"></div>
 
     <div class="question">
     <p>Have you smoked 100+ cigarettes (5 packs) in your life?</p>
@@ -103,7 +106,6 @@
     
     <div class="question"><p>Over the past 30 days, how many hours per day (on average) did you watch TV or videos?</p><input id="tv"></div>
 
-    <div class="question"><p>Annual income</p><input id="income"></div>
   </div>
   
   <div>
