@@ -84,3 +84,11 @@ select {
   color: #B82601;
 }
 
+/* adding media query for phones */
+@media screen and (max-width: 812px) {
+
+  .main * {
+    flex-basis: 100%;
+  }
+
+}
