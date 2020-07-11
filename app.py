@@ -30,16 +30,15 @@ def _model_prediction(income, pulse, age_smoke, race, height, weight, supps, foo
   income, tv, heaviest, bmi, race1, race2, race3, race4, race6, race7 = _clean_data(income, tv, heaviest, height, weight, race)
   X = np.array([income, pulse, age_smoke, race1, bmi, supps, food, race6, race4, race3, race2, milk, gender, race7, smoke, salt, pressure, tv, relative, heaviest, age]).reshape(1, -1)
   y_hat = model.predict_proba(X)
-  print(y_hat)
-  if y_hat[:,1] > 0.5:
+  if y_hat[:,1] > 0.5:      #probability threshold of 50%
     return 'HIGH-RISK'
   elif y_hat[:,1] <= 0.5:
     return 'NOT HIGH-RISK'
 
 def _clean_data(income, tv, heaviest, height, weight, race):
   race_array = np.zeros(6)
-  race_array[race-1] = 1
-  race1, race2, race3, race4, race6, race7 = race_array
+  race_array[race-1] = 1          #creates array: value of 1 at selected race, else 0
+  race1, race2, race3, race4, race6, race7 = race_array   #deconstruct array
   poverty_ratio = income/20000
   tv = round(tv,1)
   heaviest = round(heaviest,1)
