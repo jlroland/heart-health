@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
-import missingno as msno
 import boto3
 import io
-s3 = boto3.client('s3')
+import missingno as msno
+from sklearn.impute import SimpleImputer, KNNImputer
 
+s3 = boto3.client('s3')
 obj = s3.get_object(Bucket='health-survey-tables', Key='2016/demo.csv')
 table = pd.read_csv(io.BytesIO(obj['Body'].read())).set_index('SEQN')
 
@@ -19,20 +20,20 @@ for key in key_list:
     table = pd.concat([table, pd.read_csv(io.BytesIO(response['Body'].read())).set_index('SEQN')],
                       axis=1,verify_integrity=True)
 
+# create msno graphic showing missing data before cleaning
 # msno.matrix(table)
 # plt.savefig('img/missing_before.png')
-    
-adults = table[(table['RIDAGEYR']>=18) & (table['RIDSTATR']==2)]
-weight_2yrint = adults['WTINT2YR']
-weight_2yrmec = adults['WTMEC2YR']
-adults.drop(['WTINT2YR', 'WTMEC2YR'], axis=1, inplace=True)
 
-#cardio questions only asked of people age 40+
+#limiting data to adults who completed both survey & examination
+adults = table[(table['RIDAGEYR']>=18) & (table['RIDSTATR']==2)]
+
+#angina questions only asked of people age 40+
 angina = adults[(adults['CDQ001'] == 1) & (adults['CDQ002'] == 1) & (adults['CDQ004'] == 1)
                  & (adults['CDQ005'] == 1) & (adults['CDQ006'] == 1)
                  & ((adults['CDQ009D'] == 4) | (adults['CDQ009E'] == 5))
                  | ((adults['CDQ009F'] == 6) & (adults['CDQ009G'] == 7))]
 
+#history of CHD, angina, heart attack and stroke were taken for people age 20+
 heart_history = adults[(adults['MCQ160C'] == 1) | (adults['MCQ160D'] == 1) | (adults['MCQ160E'] == 1)
                         | (adults['MCQ160F'] == 1)]
 
@@ -46,6 +47,7 @@ for num in heart_history.index:
 adults.drop(adults.loc[:,'CDQ001':'CDQ010'], axis=1, inplace=True)
 adults.drop(adults.loc[:,'MCQ160B':'MCQ180F'], axis=1, inplace=True)
 
+#some featuring engineering is being done before related features are dropped
 adults['DMDEDUC2'][((adults['RIDAGEYR']==18) | (adults['RIDAGEYR']==19)) & (adults['DMDEDUC3']==15)] = 1
 adults['DMDEDUC2'][((adults['RIDAGEYR']==18) | (adults['RIDAGEYR']==19)) & (adults['DMDEDUC3']!=15)] = 0
 sys = adults[['BPXSY1', 'BPXSY2', 'BPXSY3', 'BPXSY4']]
@@ -55,10 +57,10 @@ adults['AVGDIA'] = np.nanmean(dia, axis=1)
 adults['DBD900'][(adults['DBD895']==0) &(pd.isna(adults['DBD900']))] = 0
 
 #demo
+adults.drop(['WTINT2YR', 'WTMEC2YR'], axis=1, inplace=True)
 adults.drop(['SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'DMQADFC', 'RIDEXMON', 'RIDEXAGM', 'DMDCITZN', 'DMDEDUC3'], axis=1, inplace=True)
 adults.drop(adults.loc[:,'RIDEXPRG':'DMDHSEDU'], axis=1, inplace=True)
 adults.drop(adults.loc[:,'SDMVPSU':'INDFMIN2'], axis=1, inplace=True)
-
 
 #supps
 adults.drop(['DSDANCNT', 'DSD010'], axis=1, inplace=True)
@@ -89,7 +91,6 @@ adults.drop(adults.loc[:,'CBQ596':'CBQ590'], axis=1, inplace=True)
 #disability
 adults.drop(adults.loc[:,'DLQ010':'DLQ080'], axis=1, inplace=True)
 adults.drop(adults.loc[:,'DLQ110':'DLQ170'], axis=1, inplace=True)
-
 
 #insurance
 adults.drop(adults.loc[:,'HIQ031A':'HIQ210'], axis=1, inplace=True)
@@ -189,14 +190,18 @@ milk = pd.get_dummies(adults['DBQ197'], prefix='milk')
 data = pd.concat([adults, race, diet_health, milk], axis=1)
 data.drop(['RIDRETH3', 'DBQ700', 'DBQ197'], axis=1, inplace=True)
 
+# create msno graphic showing missing data after cleaning (before imputer)
 # msno.matrix(data)
 # plt.savefig('img/missing_after.png')
 
-# msno.dendrogram(adults)
-# plt.savefig('img/dendrogram.png')
+imputer = KNNImputer(n_neighbors=2, weights="uniform")
+data[['MCQ300A', 'MCQ300C', 'ALQ101']] = imputer.fit_transform(data[['MCQ300A', 'MCQ300C', 'ALQ101']])
+imputer2 = KNNImputer(n_neighbors=2, weights="uniform")
+data[['ALQ141Q', 'INDFMPIR', 'BMXBMI', 'BMDAVSAD', 'BPXPLS', 'OCQ180', 'WHD140', 'WHQ150', 'AVGSYS', 'AVGDIA']] = imputer2.fit_transform(data[['ALQ141Q', 'INDFMPIR', 'BMXBMI', 'BMDAVSAD', 'BPXPLS', 'OCQ180', 'WHD140', 'WHQ150', 'AVGSYS', 'AVGDIA']])
+
 
 '''
-initial drop--
+initial dropped features--
 demo: 'SDDSRVYR', 'RIDSTATR', 'RIDAGEMN', 'RIDRETH1', 'DMQADFC', 'RIDEXMON', 'RIDEXAGM', 'DMDCITZN', 'DMDEDUC3', 'RIDEXPRG':'DMDHSEDU', 'SDMVPSU':'INDFMIN2'
 nutrients1: 'DR1EXMER_nutrient1', 'DRABF_nutrient1', 'DR1DBIH_nutrient1':'DR1HELP_nutrient1', 'DR1STY':'DRQSDT91', 'DR1_330Z':'DR1TWS', 'DRD350A':'DRD350K', 'DRD370A':'DRD370V'
 nutrients2: 'DR2EXMER_nutrient2', 'DRABF_nutrient2', 'DR2DBIH_nutrient2':'DR2HELP_nutrient2', 'DR2STY', 'DR2SKY', 'DR2_330Z':'DR2TWS'
