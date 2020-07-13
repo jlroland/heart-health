@@ -12,13 +12,16 @@ from sklearn.metrics import log_loss, roc_curve, roc_auc_score, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.neural_network import MLPClassifier
 
+run src/clean.py
+
 #scatter plot of gender vs. age with class labels
-age_gender = agg_data[['age', 'gender']]
+jitter= 0.4 * np.random.random_sample(data['RIAGENDR'].shape) - 0.2
+age_gender = data[['RIDAGEYR', 'RIAGENDR']]
 colors = np.where(cardio_risk==1,'r','g')
 fig,ax = plt.subplots(figsize=(10,8))
-ax.scatter(x=agg_data['age'][cardio_risk==0],y=agg_data['gender'][cardio_risk==0], alpha=0.2, c='green', 
+ax.scatter(x=data['RIDAGEYR'][cardio_risk==0],y=data['RIAGENDR'][cardio_risk==0] + jitter[:len(data['RIAGENDR'][cardio_risk==0])], alpha=0.2, c='green', 
            label='low-risk')
-ax.scatter(x=agg_data['age'][cardio_risk==1],y=agg_data['gender'][cardio_risk==1], alpha=0.2, c='red', 
+ax.scatter(x=data['RIDAGEYR'][cardio_risk==1],y=data['RIAGENDR'][cardio_risk==1] + jitter[-len(data['RIAGENDR'][cardio_risk==1]):], alpha=0.2, c='red', 
            label='high-risk')
 ax.set_xlabel('Age (years)')
 ax.set_yticks([0,1])
@@ -26,7 +29,7 @@ ax.set_yticklabels(['female', 'male'])
 ax.set_ylabel('Gender')
 ax.set_title('Risk Distribution by Age & Gender')
 ax.legend()
-#plt.savefig('img/initial_model_dist.png')
+#plt.savefig('img/age_gender_dist.png')
 
 #Initial baseline model using age & gender
 X_train_init, X_test_init, y_train_init, y_test_init = train_test_split(agg_data[['age', 'gender']],cardio_risk)

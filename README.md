@@ -31,7 +31,7 @@ Multiple classification models were considered in order to classify individuals 
 
 Initial EDA showed that age and gender would be a good starting point for a baseline model upon which to build.
 
-![Looking at label distribution based on age & gender](img/initial_model_dist.png)
+![Looking at label distribution based on age & gender](img/age_gender_dist.png)
 
 The initial model (using age and gender) was a logistic regression without normalization and had an ROC AUC score of 0.79.
 
