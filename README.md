@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="200" height="120" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="200" height="125" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
@@ -25,15 +25,15 @@ Individuals in the dataset were labeled as high-risk for cardiovascular disease 
 2. Answering the Medical History questionnaire in the affirmative for history of coronary heart disease, angina, heart attack or stroke 
 Note: The Cardiovascular Health questionnaire was only administerd to adults age 40+.  The Medical History questionnaire was only administerd to adults age 20+.
 
-## Models--Round 1
-
-Multiple classification models were considered in order to classify individuals as high-risk or not.  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used. The classification probability threshold was set at 0.5 while examining relative performance between models.
+## EDA & Creating a Starting Point
 
 Initial EDA showed that age and gender would be a good starting point for a baseline model upon which to build.
 
 ![Looking at label distribution based on age & gender](img/age_gender_dist.png)
 
-The initial model (using age and gender) was a logistic regression without normalization and had an ROC AUC score of 0.79.
+About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used. The classification probability threshold was set at 0.5 while examining relative performance between models.
+
+The initial model (using age and gender) was a logistic regression without normalization and had an AUC score of 0.85.
 
 Once a baseline was set, the following models were explored:
 
@@ -45,7 +45,7 @@ Once a baseline was set, the following models were explored:
 
 ## Results--Round 1
 
-All models performed similarly based on typcial metrics like log loss and ROC AUC score.  Logistic regression appeared to have the best predictive ability by a narrow margin.
+All models performed similarly based on typcial metrics like log loss and AUC score.  Logistic regression appeared to have the best predictive ability by a narrow margin.
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
