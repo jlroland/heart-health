@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="205" height="125" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="115" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
@@ -31,23 +31,19 @@ Initial EDA showed that age and gender would be a good starting point for a base
 
 ![Looking at label distribution based on age & gender](img/age_gender_dist.png)
 
-About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used. The classification probability threshold was set at 0.5 while examining relative performance between models.
-
-The initial model (using age and gender) was a logistic regression without normalization and had an AUC score of 0.85.
+The baseline model (using age and gender) was a logistic regression without normalization and the AUC score was 0.85.  About 10% of individuals in the dataset were labeled high-risk; due to class imbalance, only soft classification was used.  Given the unusually high AUC score based on two features, it was worth consulting a confusion matrix (shown below at a probability threshold of 0.5).
 
 ![Confusion matrix for age/gender base model](img/cf_base_model.png)
 
-Once a baseline was set, the following models were explored:
+The confusion matrix shows the inclination of the model to predict the negative class, highlighting the class imbalance.
 
-1. Logistic Regression with L2 regularization using normalized data
-2. Random Forest Classifier with n_estimators=1000 and max_depth=2
+Once a baseline was set, the following models were explored using normalized data for all 63 features:
+
+1. Logistic Regression with L2 regularization
+2. Random Forest Classifier with n_estimators=1000 and min_samples_split=10
 3. Gradient Boosting Classifier with n_estimators=1000 and max_depth=2
-4. MLP Classifier with hidden_layer_sizes=(100, 2) and a logistic activation function
 
-
-## Results--Round 1
-
-All models performed similarly based on typcial metrics like log loss and AUC score.  Logistic regression appeared to have the best predictive ability by a narrow margin.
+All models performed similarly based on typcial metrics like AUC score.  Logistic regression appeared to have the best predictive ability by a narrow margin.
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
