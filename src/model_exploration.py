@@ -60,7 +60,8 @@ ax.set_title('Logistic, Threshold=0.5')
 for i in range(2):
     for j in range(2):
         ax.text(j, i, cm[i, j], ha='center', va='center', color='black', size='large')
-#plt.savefig('cf_base_model.png')
+fig.tight_layout()
+#plt.savefig('img/cf_base_model.png')
 plt.show()
 
 scaler = MinMaxScaler()
@@ -126,8 +127,7 @@ fig.update_layout(title='ROC Curves',
 fig.show()
 #fig.write_image('img/roc_comparison.png', width=1000, height=500)
 
-#Confusion matrix for logistic regression model (best performance by small margin)
-#Probability threshold = 0.5
+#Confusion matrix for logistic regression model, probability threshold = 0.5
 cm = confusion_matrix(y_log[test], get_ypred(y_log[test], y_hat_log, 0.5))
 fig, ax = plt.subplots(figsize=(4, 4))
 ax.imshow(cm, cmap='twilight')
@@ -141,5 +141,42 @@ ax.set_title('Logistic, Threshold=0.5')
 for i in range(2):
     for j in range(2):
         ax.text(j, i, cm[i, j], ha='center', va='center', color='black', size='large')
-plt.show()
+fig.tight_layout()
 #plt.savefig('img/cf_log.png')
+plt.show()
+
+#Confusion matrix for random forest model, probability threshold = 0.5
+cm = confusion_matrix(y_rf[test], get_ypred(y_rf[test], y_hat_rf, 0.5))
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.imshow(cm, cmap='twilight')
+ax.grid(False)
+ax.xaxis.set(ticks=(0, 1))
+ax.yaxis.set(ticks=(0, 1))
+ax.set_xticklabels(('Predicted 0', 'Predicted 1'), size='x-large')
+ax.set_yticklabels(('Actual 0', 'Actual 1'), size='x-large')
+ax.set_ylim(1.5, -0.5)
+ax.set_title('Random Forest, Threshold=0.5')
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, cm[i, j], ha='center', va='center', color='black', size='large')
+fig.tight_layout()
+#plt.savefig('img/cf_rf.png')
+plt.show()
+
+#Confusion matrix for gradient boosting model, probability threshold = 0.5
+cm = confusion_matrix(y_gbc[test], get_ypred(y_gbc[test], y_hat_gbc, 0.5))
+fig, ax = plt.subplots(figsize=(4, 4))
+ax.imshow(cm, cmap='twilight')
+ax.grid(False)
+ax.xaxis.set(ticks=(0, 1))
+ax.yaxis.set(ticks=(0, 1))
+ax.set_xticklabels(('Predicted 0', 'Predicted 1'), size='x-large')
+ax.set_yticklabels(('Actual 0', 'Actual 1'), size='x-large')
+ax.set_ylim(1.5, -0.5)
+ax.set_title('Gradient Boosting, Threshold=0.5')
+for i in range(2):
+    for j in range(2):
+        ax.text(j, i, cm[i, j], ha='center', va='center', color='black', size='large')
+fig.tight_layout()
+#plt.savefig('img/cf_gbc.png')
+plt.show()

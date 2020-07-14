@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="115" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="118" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
