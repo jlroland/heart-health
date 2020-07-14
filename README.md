@@ -61,13 +61,19 @@ Based on the discovery that the false negative rate needed to be decreased, it b
 2. Random Forest Classifier with n_estimators=1000 and max_depth=2
 3. Gradient Boosting Classifier with n_estimators=1000 and max_depth=2
 
-Each model showed an increase in log loss, and the ROC AUC scores showed little change from the first round of models.  Each of the models showed improvement in reducing false negatives, but logistic regression still performed best. The plot below shows the beta coefficients for the top features resulting from the updated logistic regression.
+Each model showed an increase in log loss, and the AUC scores showed little change from the first round of models.  Each of the models showed improvement in reducing false negatives (see confusion matrices below), but logistic regression still performed best.
+
+<img align="left" src="img/cf_log_upsample.png" alt="upsampled logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf_upsample.png" alt="upsampled random forest confusion matrix" width="250" height="250"><img src="img/cf_gbc_upsample.png" alt="upsampled gradient boosting confusion matrix" width="250" height="250">
+
+The plot below shows the beta coefficients for the top features resulting from the upsampled logistic regression.
 
 ![Most important features by feature importance for logistic regression](img/feature_importance_reduced.png)
 
-Oversampling the minority class and training the model on the top features increased recall from 0.17 to 0.81.  The corresponding trade-off was a decrease in precision from 0.5 to 0.28.  These results were based on a probability threshold of 0.5; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
+From the list of top features, several were chosen to create a model with a reduced number of features.  The idea behind limiting the number of features was to create a predictive model that could be developed into a user-friendly application.  Incorporating all 63 features would require dozens of inputs from each user before rendering a prediction.  Reducing the number of user inputs by focusing on the top features would reduce the burden on the user with little change to the metrics of the model.  The confusion matrix below represents a logistic regression model trained on a limited number of features.
 
 ![Confusion matrix at threshold 0.5 for logistic regression with oversampling](img/cf_log_upsample_limited.png)
+
+Oversampling the minority class and training the model on the top features increased recall from 0.19 to 0.81.  The corresponding trade-off was a decrease in precision from 0.54 to 0.28.  These results were based on a probability threshold of 0.5; lowering the threshold would produce a greater increase in recall and a greater decrease in precision.
 
 ## What I Learned
 
