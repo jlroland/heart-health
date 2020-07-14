@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="128" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="230" height="130" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
@@ -47,22 +47,19 @@ All models performed similarly based on typcial metrics like AUC score.  Logisti
 
 ![ROC curves for applied models](img/roc_comparison.png)
 
-Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The confusion matrix at threshold 0.5 is shown below.
+As previously observed, class imbalance had an effect on AUC score.  Therefore, confusion matrices for each model at a threshold of 0.5 are shown below.
 
-<img align="left" src="img/cf_log.png" alt="logistic regression confusion matrix" width="200" height="200"><img src="img/cf_rf.png" alt="random forest confusion matrix" width="200" height="200"><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="200" height="200">
+<img align="left" src="img/cf_log.png" alt="logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf.png" alt="random forest confusion matrix" width="250" height="250"><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="250" height="250">
 
-The false negative rate, even at lower thresholds, indicated that implementing this model would be impractical due to the high cost associated with false negatives.  The model needed greater ability to predict the high-risk label.
+The false negative rate indicated that implementing this model would be impractical due to the high cost associated with false negatives.  The model needed greater ability to predict the high-risk label.
 
-## Models--Round 2
+## Mitigating Class Imbalance
 
-Based on previous results, it was clear that the models had difficulty predicting the positive case (i.e high-risk) due to class imbalance.  Given the relatively high cost associated with false negatives, the next goal was to increase recall by reducing class imbalance.  Therefore, the training data was subjected to oversampling of the minority class before fitting models again. The following models produced improvement in recall:
+Based on the discovery that the false negative rate needed to be decreased, it became apparent that increasing recall would be more valuable than increasing AUC score.  To mitigate the effect of class imbalance, the training data was subjected to oversampling of the minority class before fitting models again. The following models produced improvement in recall:
 
 1. Logistic Regression with L1 regularization using normalized data
 2. Random Forest Classifier with n_estimators=1000 and max_depth=2
 3. Gradient Boosting Classifier with n_estimators=1000 and max_depth=2
-
-
-## Results--Round 2
 
 Each model showed an increase in log loss, and the ROC AUC scores showed little change from the first round of models.  Each of the models showed improvement in reducing false negatives, but logistic regression still performed best. The plot below shows the beta coefficients for the top features resulting from the updated logistic regression.
 
