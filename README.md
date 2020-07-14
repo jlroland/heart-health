@@ -53,7 +53,9 @@ All models performed similarly based on typcial metrics like AUC score.  Logisti
 
 As previously observed, class imbalance had an effect on AUC score.  Therefore, confusion matrices for each model at a threshold of 0.5 are shown below.
 
-<img align="left" src="img/cf_log.png" alt="logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf.png" alt="random forest confusion matrix" width="250" height="250"><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="250" height="250">
+<p align="center">
+  <img src="img/cf_log.png" alt="logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf.png" alt="random forest confusion matrix"          width="250" height="250"><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="250" height="250">
+</p>
 
 The false negative rate indicated that implementing this model would be impractical due to the high cost associated with false negatives.  The model needed greater ability to predict the high-risk label.
 
@@ -67,11 +69,15 @@ Based on the discovery that the false negative rate needed to be decreased, it b
 
 Each model showed an increase in log loss, and the AUC scores showed little change from the first round of models.  Each of the models showed improvement in reducing false negatives (see confusion matrices below), but logistic regression still performed best.
 
-<img align="left" src="img/cf_log_upsample.png" alt="upsampled logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf_upsample.png" alt="upsampled random forest confusion matrix" width="250" height="250"><img src="img/cf_gbc_upsample.png" alt="upsampled gradient boosting confusion matrix" width="250" height="250">
+<p align="center">
+  <img src="img/cf_log_upsample.png" alt="upsampled logistic regression confusion matrix" width="250" height="250"><img src="img/cf_rf_upsample.png" alt="upsampled    random forest confusion matrix" width="250" height="250"><img src="img/cf_gbc_upsample.png" alt="upsampled gradient boosting confusion matrix" width="250"          height="250">
+</p>
 
 The plot below shows the beta coefficients for the top features resulting from the upsampled logistic regression.
 
-![Most important features by feature importance for logistic regression](img/feature_importance_reduced.png)
+<p align="center">
+  <img src="img/feature_importance_reduced.png" alt="top features by beta coefficient">
+</p>
 
 From the list of top features, several were chosen to create a model with a reduced number of features.  The idea behind limiting the number of features was to create a predictive model that could be developed into a user-friendly application.  Incorporating all 63 features would require dozens of inputs from each user before rendering a prediction.  Reducing the number of user inputs by focusing on the top features would reduce the burden on the user with little change to the metrics of the model.  The confusion matrix below represents a logistic regression model trained on a limited number of features.
 
@@ -83,9 +89,9 @@ Oversampling the minority class and training the model on the top features incre
 
 ## What I Learned
 
-<img align="left" width="200" height="120" src="img/element5-digital-OyCl7Y4y0Bk-unsplash.jpg">Data quality is the first underlying concern.  Even when surveys are highly-structured and planned carefully, there is plenty of room for error and missing values.  Survey data was used in building this model because it is publicly available, but I suspect the model could be improved by using data from targeted medical research (which is usually restricted from public use).
+<img align="left" width="200" height="120" src="img/element5-digital-OyCl7Y4y0Bk-unsplash.jpg">Data quality is the first underlying concern.  Even when surveys are highly-structured and planned carefully, there is plenty of room for error and missing values.  Survey data was used in building this model because it is publicly available, but I suspect the model could be improved by using data from targeted medical research (which is usually restricted from public use).  In addition, data from a longitudinal study would be more beneficial in capturing the long-term effects of individuals' habits.
 
-Class imbalance is the enemy and must be destroyed!  The first models I trained were inclined to predict that no individuals were high-risk.  Implementing a resampling scheme when imbalance exists, whether it's undersampling the majority, oversampling the minority or SMOTE, will greatly benefit the training of the model.  This is especially true when you would prefer to skew your error toward false positives rather than false negatives.
+Class imbalance is the enemy and must be destroyed!  The first models I trained were inclined to predict that no individuals were high-risk.  Implementing a resampling scheme when imbalance exists, whether it's undersampling the majority, oversampling the minority or SMOTE, will greatly benefit the training of the model.
 
 Be mindful of the practical application of the model.  This helps you judge which metrics to use in evaluating potential models--in this case, recall was more important than log loss or AUC because false negatives are especially costly.  It will also guide you in deciding what trade-offs are acceptable.  In this case, health professionals would need to be involved in deciding the acceptable threshold at which the false negatives are low enough to justify the corresponding increase in false positives; the costs associated with these types of error are not equivalent.
 
