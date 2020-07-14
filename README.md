@@ -2,7 +2,7 @@
 
 ## Introduction
 
-<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="130" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
+<p>Cardiovascular disease continues to be the leading cause of death in the U.S.  Nearly half of all heart attacks have symptoms so mild that individuals don't know they are having a heart attack--a so-called silent heart attack.  Health professionals estimate that 8 to 11 million people suffer from silent strokes <img align="left" width="225" height="128" src="img/marcelo-leal-k7ll1hpdhFA-unsplash.jpg"> each year in which individuals are asymptomatic but would have evidence of a stroke on an MRI.  These risks, combined with the ever-increasing cost of healthcare in the U.S., indicate a need for increased diagnostic efficiency.  How can we identify the individuals who are most at risk?  What preventative measures could be implemented to decrease risk?</p>
 
 ## Data
 
@@ -49,7 +49,7 @@ All models performed similarly based on typcial metrics like AUC score.  Logisti
 
 Since logistic regression produced the best metrics, a confusion matrix was constructed for this model at different probability thresholds.  The confusion matrix at threshold 0.5 is shown below.
 
-<img src="img/cf_log.png" alt="logistic regression confusion matrix" width="100" height="10"/><img src="img/cf_rf.png" alt="random forest confusion matrix" width="100" height="100"/><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="100" height="100"/>
+<img align="left" src="img/cf_log.png" alt="logistic regression confusion matrix" width="200" height="200"><img src="img/cf_rf.png" alt="random forest confusion matrix" width="200" height="200"><img src="img/cf_gbc.png" alt="gradient boosting confusion matrix" width="200" height="200">
 
 The false negative rate, even at lower thresholds, indicated that implementing this model would be impractical due to the high cost associated with false negatives.  The model needed greater ability to predict the high-risk label.
 
