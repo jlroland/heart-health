@@ -7,13 +7,13 @@
 ## Data
 
 NHANES (National Health and Nutrition Examination Survey) is a national survey conducted by the CDC every couple of years.  The survey contains over 1,000 variables spread across dozens of files, asking questions about lifestyle and medical history, as well as conducting brief medical examinations and running blood tests.
-The data used in building this model was taken from the 2015-2016 survey and can be found at:  
+The data used in building this model was taken from the 2015-2016 survey (the most recent available at the time) and can be found at:  
 https://wwwn.cdc.gov/nchs/nhanes/continuousnhanes/default.aspx?BeginYear=2015.
 
 There were 16 files used in compiling the data; these were stored in an AWS S3 bucket. The graphic below represents the amount of missing data (shown as white space) encountered in the original compilation (9971 observations, 521 features).
 ![Missing data before cleaning](img/missing_before.png)
 
-The data was limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on intuitive relevance to heart disease (e.g. excluding dental health) and second on quality of data (e.g. features with 90% of values missing). After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
+The data was limited to the adult population who participated in both the questionnaire and examination portions of the survey, resulting in 5,735 individuals.  Of the many variables available for analysis, the list was narrowed to produce 63 features for use in evaluating different models.  The elimination process was based first on suspected ranking of relevance to heart disease and second on quality of data (e.g. features with 90% of values missing).  The elimination of features is due mainly to current time constraints; additional work in the future would include attempts to reincorporate eliminated features.  After initial data cleaning based on survey response coding and skip patterns, the amount of missing data decreased significantly (see below).
 
 ![Missing data after cleaning](img/missing_after.png)
 
